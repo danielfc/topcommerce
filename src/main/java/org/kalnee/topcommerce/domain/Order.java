@@ -10,7 +10,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.kalnee.topcommerce.domain.enumeration.OrderStatus;
+
+import static org.kalnee.topcommerce.domain.enumeration.OrderStatus.CREATED;
 
 /**
  * A Order.
@@ -27,11 +30,12 @@ public class Order implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private OrderStatus status;
+    private OrderStatus status = CREATED;
 
     @NotNull
-    @Column(name = "created_at", nullable = false)
-    private ZonedDateTime createdAt;
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private ZonedDateTime createdAt = ZonedDateTime.now();
 
     @NotNull
     @Column(name = "code", nullable = false)
