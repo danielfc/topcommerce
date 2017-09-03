@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import org.kalnee.topcommerce.domain.Product;
 
 import org.kalnee.topcommerce.repository.ProductRepository;
+import org.kalnee.topcommerce.security.AuthoritiesConstants;
 import org.kalnee.topcommerce.web.rest.util.HeaderUtil;
 import org.kalnee.topcommerce.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -48,6 +50,7 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/products")
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.MANAGER})
     @Timed
     public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to save Product : {}", product);
@@ -70,6 +73,7 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/products")
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.MANAGER})
     @Timed
     public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to update Product : {}", product);
@@ -118,6 +122,7 @@ public class ProductResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/products/{id}")
+    @Secured(AuthoritiesConstants.ADMIN)
     @Timed
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         log.debug("REST request to delete Product : {}", id);
