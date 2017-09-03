@@ -1,13 +1,15 @@
 import { browser, element, by, $ } from 'protractor';
 import { NavBarPage } from './../page-objects/jhi-page-objects';
-
+const path = require('path');
 
 describe('OrderItem e2e test', () => {
 
     let navBarPage: NavBarPage;
     let orderItemDialogPage: OrderItemDialogPage;
     let orderItemComponentsPage: OrderItemComponentsPage;
-
+    const fileToUpload = '../../../../main/webapp/content/images/logo-jhipster.png';
+    const absolutePath = path.resolve(__dirname, fileToUpload);
+    
 
     beforeAll(() => {
         browser.get('/');
@@ -33,6 +35,8 @@ describe('OrderItem e2e test', () => {
 
     it('should create and save OrderItems', () => {
         orderItemComponentsPage.clickOnCreateButton();
+        orderItemDialogPage.setQuantityInput('5');
+        expect(orderItemDialogPage.getQuantityInput()).toMatch('5');
         orderItemDialogPage.orderSelectLastOption();
         orderItemDialogPage.productSelectLastOption();
         orderItemDialogPage.save();
@@ -61,11 +65,20 @@ export class OrderItemDialogPage {
     modalTitle = element(by.css('h4#myOrderItemLabel'));
     saveButton = element(by.css('.modal-footer .btn.btn-primary'));
     closeButton = element(by.css('button.close'));
+    quantityInput = element(by.css('input#field_quantity'));
     orderSelect = element(by.css('select#field_order'));
     productSelect = element(by.css('select#field_product'));
 
     getModalTitle() {
         return this.modalTitle.getText();
+    }
+
+    setQuantityInput = function (quantity) {
+        this.quantityInput.sendKeys(quantity);
+    }
+
+    getQuantityInput = function () {
+        return this.quantityInput.getAttribute('value');
     }
 
     orderSelectLastOption = function () {

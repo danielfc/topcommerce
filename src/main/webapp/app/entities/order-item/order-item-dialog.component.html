@@ -12,6 +12,25 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="orderItem.id" readonly />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_quantity">Quantity</label>
+            <input type="number" class="form-control" name="quantity" id="field_quantity"
+                [(ngModel)]="orderItem.quantity" required min="1" />
+            <div [hidden]="!(editForm.controls.quantity?.dirty && editForm.controls.quantity?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.quantity?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.quantity?.errors?.min">
+                    This field should be at least 1.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.quantity?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" for="field_order">Order</label>

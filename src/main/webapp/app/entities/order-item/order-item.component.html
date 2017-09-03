@@ -17,6 +17,7 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
+            <th><span>Quantity</span></th>
             <th><span>Order</span></th>
             <th><span>Product</span></th>
             <th></th>
@@ -25,6 +26,7 @@
             <tbody>
             <tr *ngFor="let orderItem of orderItems ;trackBy: trackId">
                 <td><a [routerLink]="['../order-item', orderItem.id ]">{{orderItem.id}}</a></td>
+                <td>{{orderItem.quantity}}</td>
                 <td>
                     <div *ngIf="orderItem.order">
                         <a [routerLink]="['../order', orderItem.order?.id ]" >{{orderItem.order?.id}}</a>

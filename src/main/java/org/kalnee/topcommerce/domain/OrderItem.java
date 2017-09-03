@@ -2,6 +2,7 @@ package org.kalnee.topcommerce.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -18,6 +19,11 @@ public class OrderItem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Min(value = 1)
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
+
     @ManyToOne
     private Order order;
 
@@ -31,6 +37,19 @@ public class OrderItem implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public OrderItem quantity(Integer quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Order getOrder() {
@@ -84,6 +103,7 @@ public class OrderItem implements Serializable {
     public String toString() {
         return "OrderItem{" +
             "id=" + getId() +
+            ", quantity='" + getQuantity() + "'" +
             "}";
     }
 }

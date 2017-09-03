@@ -37,6 +37,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = TopcommerceApp.class)
 public class OrderItemResourceIntTest {
 
+    private static final Integer DEFAULT_QUANTITY = 1;
+    private static final Integer UPDATED_QUANTITY = 2;
+
     @Autowired
     private OrderItemRepository orderItemRepository;
 
@@ -73,7 +76,8 @@ public class OrderItemResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static OrderItem createEntity(EntityManager em) {
-        OrderItem orderItem = new OrderItem();
+        OrderItem orderItem = new OrderItem()
+            .quantity(DEFAULT_QUANTITY);
         return orderItem;
     }
 
@@ -97,6 +101,7 @@ public class OrderItemResourceIntTest {
         List<OrderItem> orderItemList = orderItemRepository.findAll();
         assertThat(orderItemList).hasSize(databaseSizeBeforeCreate + 1);
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
+        assertThat(testOrderItem.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
     }
 
     @Test
@@ -120,6 +125,24 @@ public class OrderItemResourceIntTest {
 
     @Test
     @Transactional
+    public void checkQuantityIsRequired() throws Exception {
+        int databaseSizeBeforeTest = orderItemRepository.findAll().size();
+        // set the field null
+        orderItem.setQuantity(null);
+
+        // Create the OrderItem, which fails.
+
+        restOrderItemMockMvc.perform(post("/api/order-items")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(orderItem)))
+            .andExpect(status().isBadRequest());
+
+        List<OrderItem> orderItemList = orderItemRepository.findAll();
+        assertThat(orderItemList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllOrderItems() throws Exception {
         // Initialize the database
         orderItemRepository.saveAndFlush(orderItem);
@@ -128,7 +151,8 @@ public class OrderItemResourceIntTest {
         restOrderItemMockMvc.perform(get("/api/order-items?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(orderItem.getId().intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(orderItem.getId().intValue())))
+            .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)));
     }
 
     @Test
@@ -141,7 +165,8 @@ public class OrderItemResourceIntTest {
         restOrderItemMockMvc.perform(get("/api/order-items/{id}", orderItem.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(orderItem.getId().intValue()));
+            .andExpect(jsonPath("$.id").value(orderItem.getId().intValue()))
+            .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY));
     }
 
     @Test
@@ -161,6 +186,8 @@ public class OrderItemResourceIntTest {
 
         // Update the orderItem
         OrderItem updatedOrderItem = orderItemRepository.findOne(orderItem.getId());
+        updatedOrderItem
+            .quantity(UPDATED_QUANTITY);
 
         restOrderItemMockMvc.perform(put("/api/order-items")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -171,6 +198,7 @@ public class OrderItemResourceIntTest {
         List<OrderItem> orderItemList = orderItemRepository.findAll();
         assertThat(orderItemList).hasSize(databaseSizeBeforeUpdate);
         OrderItem testOrderItem = orderItemList.get(orderItemList.size() - 1);
+        assertThat(testOrderItem.getQuantity()).isEqualTo(UPDATED_QUANTITY);
     }
 
     @Test
