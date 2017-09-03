@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "order",
+            "otherEntityName": "order",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "product",
+            "otherEntityName": "product",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20170903133000",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "order_item",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}
