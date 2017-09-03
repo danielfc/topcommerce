@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "order"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "status",
+            "fieldType": "OrderStatus",
+            "fieldValues": "CREATED,PENDING,COMPLETED,CANCELED"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170903132638",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "jhi_order",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -2,12 +2,14 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { TopcommerceProductTypeModule } from './product-type/product-type.module';
 import { TopcommerceProductModule } from './product/product.module';
+import { TopcommerceOrderModule } from './order/order.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
     imports: [
         TopcommerceProductTypeModule,
         TopcommerceProductModule,
+        TopcommerceOrderModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
