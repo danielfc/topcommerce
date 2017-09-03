@@ -14,15 +14,15 @@
         </dd>
         <dt><span>Price</span></dt>
         <dd>
-            <span>{{product.price}}</span>
+            <span>{{product.price | currency:'USD':true}}</span>
         </dd>
         <dt><span>Created At</span></dt>
         <dd>
             <span>{{product.createdAt | date:'medium'}}</span>
         </dd>
-        <dt><span>Image Path</span></dt>
+        <dt><span>Image</span></dt>
         <dd>
-            <span>{{product.imagePath}}</span>
+            <img [src]="product.imagePath" class="img-responsive max-height-s">
         </dd>
         <dt><span>Type</span></dt>
         <dd>

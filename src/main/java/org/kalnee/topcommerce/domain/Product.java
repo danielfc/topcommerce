@@ -1,8 +1,11 @@
 package org.kalnee.topcommerce.domain;
 
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
@@ -34,8 +37,9 @@ public class Product implements Serializable {
     @Column(name = "price", precision=10, scale=2, nullable = false)
     private BigDecimal price;
 
-    @Column(name = "created_at")
-    private ZonedDateTime createdAt;
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private ZonedDateTime createdAt = ZonedDateTime.now();
 
     @NotNull
     @Column(name = "image_path", nullable = false)

@@ -31,9 +31,9 @@
                 <td><a [routerLink]="['../product', product.id ]">{{product.id}}</a></td>
                 <td>{{product.name}}</td>
                 <td>{{product.description}}</td>
-                <td>{{product.price}}</td>
+                <td>{{product.price | currency:'USD':true}}</td>
                 <td>{{product.createdAt | date:'medium'}}</td>
-                <td>{{product.imagePath}}</td>
+                <td><img [src]="product.imagePath" class="img-responsive max-height-s"></td>
                 <td>
                     <div *ngIf="product.type">
                         <a [routerLink]="['../product-type', product.type?.id ]" >{{product.type?.name}}</a>
