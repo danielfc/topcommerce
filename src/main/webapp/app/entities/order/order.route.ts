@@ -33,7 +33,7 @@ export const orderRoute: Routes = [
             'pagingParams': OrderResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER'],
             pageTitle: 'Orders'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const orderRoute: Routes = [
         path: 'order/:id',
         component: OrderDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_USER'],
             pageTitle: 'Orders'
         },
         canActivate: [UserRouteAccessService]
@@ -63,7 +63,7 @@ export const orderPopupRoute: Routes = [
         path: 'order/:id/edit',
         component: OrderPopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Orders'
         },
         canActivate: [UserRouteAccessService],
@@ -73,7 +73,7 @@ export const orderPopupRoute: Routes = [
         path: 'order/:id/delete',
         component: OrderDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'Orders'
         },
         canActivate: [UserRouteAccessService],

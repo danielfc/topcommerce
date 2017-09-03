@@ -1,12 +1,12 @@
 package org.kalnee.topcommerce.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.kalnee.topcommerce.domain.Order;
 import org.kalnee.topcommerce.service.OrderService;
 import org.kalnee.topcommerce.web.rest.util.HeaderUtil;
 import org.kalnee.topcommerce.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
-import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,14 +14,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
+
+import static org.kalnee.topcommerce.security.AuthoritiesConstants.*;
 
 /**
  * REST controller for managing Order.
@@ -48,6 +50,7 @@ public class OrderResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/orders")
+    @Secured(USER)
     @Timed
     public ResponseEntity<Order> createOrder(@Valid @RequestBody Order order) throws URISyntaxException {
         log.debug("REST request to save Order : {}", order);
@@ -70,6 +73,7 @@ public class OrderResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/orders")
+    @Secured(ADMIN)
     @Timed
     public ResponseEntity<Order> updateOrder(@Valid @RequestBody Order order) throws URISyntaxException {
         log.debug("REST request to update Order : {}", order);
@@ -89,6 +93,7 @@ public class OrderResource {
      * @return the ResponseEntity with status 200 (OK) and the list of orders in body
      */
     @GetMapping("/orders")
+    @Secured({ADMIN, MANAGER, USER})
     @Timed
     public ResponseEntity<List<Order>> getAllOrders(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Orders");
@@ -104,6 +109,7 @@ public class OrderResource {
      * @return the ResponseEntity with status 200 (OK) and with body the order, or with status 404 (Not Found)
      */
     @GetMapping("/orders/{id}")
+    @Secured({ADMIN, MANAGER, USER})
     @Timed
     public ResponseEntity<Order> getOrder(@PathVariable Long id) {
         log.debug("REST request to get Order : {}", id);
@@ -118,6 +124,7 @@ public class OrderResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/orders/{id}")
+    @Secured(ADMIN)
     @Timed
     public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
         log.debug("REST request to delete Order : {}", id);
