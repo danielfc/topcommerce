@@ -27,7 +27,7 @@
         <dt><span>Type</span></dt>
         <dd>
             <div *ngIf="product.type">
-                <a [routerLink]="['/product-type', product.type?.id]">{{product.type?.name}}</a>
+                {{product.type?.name}}
             </div>
         </dd>
     </dl>
@@ -39,6 +39,7 @@
     </button>
 
     <button type="button"
+            *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']"
             [routerLink]="['/', { outlets: { popup: 'product/'+ product.id + '/edit'} }]"
             replaceUrl="true"
             class="btn btn-primary">

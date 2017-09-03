@@ -1,29 +1,28 @@
 import './vendor.ts';
 
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Ng2Webstorage } from 'ng2-webstorage';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {Ng2Webstorage} from 'ng2-webstorage';
 
-import { TopcommerceSharedModule, UserRouteAccessService } from './shared';
-import { TopcommerceHomeModule } from './home/home.module';
-import { TopcommerceAdminModule } from './admin/admin.module';
-import { TopcommerceAccountModule } from './account/account.module';
-import { TopcommerceEntityModule } from './entities/entity.module';
+import {TopcommerceSharedModule, UserRouteAccessService} from './shared';
+import {TopcommerceHomeModule} from './home/home.module';
+import {TopcommerceAdminModule} from './admin/admin.module';
+import {TopcommerceAccountModule} from './account/account.module';
+import {TopcommerceEntityModule} from './entities/entity.module';
 
-import { customHttpProvider } from './blocks/interceptor/http.provider';
-import { PaginationConfig } from './blocks/config/uib-pagination.config';
-
-// jhipster-needle-angular-add-module-import JHipster will add new module here
-
+import {customHttpProvider} from './blocks/interceptor/http.provider';
+import {PaginationConfig} from './blocks/config/uib-pagination.config';
 import {
+    ErrorComponent,
+    FooterComponent,
     JhiMainComponent,
     LayoutRoutingModule,
     NavbarComponent,
-    FooterComponent,
-    ProfileService,
     PageRibbonComponent,
-    ErrorComponent
+    ProfileService
 } from './layouts';
+
+// jhipster-needle-angular-add-module-import JHipster will add new module here
 
 @NgModule({
     imports: [

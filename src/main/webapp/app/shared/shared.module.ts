@@ -1,20 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {DatePipe} from '@angular/common';
 
 import {
-    TopcommerceSharedLibsModule,
-    TopcommerceSharedCommonModule,
-    CSRFService,
-    AuthServerProvider,
     AccountService,
-    UserService,
-    StateStorageService,
-    LoginService,
-    LoginModalService,
-    Principal,
+    AuthServerProvider,
+    CSRFService,
     HasAnyAuthorityDirective,
-    JhiLoginModalComponent
+    JhiLoginModalComponent,
+    LoginModalService,
+    LoginService,
+    Principal,
+    StateStorageService,
+    TopcommerceSharedCommonModule,
+    TopcommerceSharedLibsModule,
+    UserService
 } from './';
+import {ShortenPipe} from './shorten/shorten.pipe';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import {
     ],
     declarations: [
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        ShortenPipe
     ],
     providers: [
         LoginService,
@@ -41,7 +43,8 @@ import {
         TopcommerceSharedCommonModule,
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        DatePipe
+        DatePipe,
+        ShortenPipe
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

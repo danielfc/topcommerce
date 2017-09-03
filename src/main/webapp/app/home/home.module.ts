@@ -1,9 +1,10 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { TopcommerceSharedModule } from '../shared';
+import {TopcommerceSharedModule} from '../shared';
 
-import { HOME_ROUTE, HomeComponent } from './';
+import {HOME_ROUTE, HomeComponent} from './';
+import {ProductCardComponent} from './product-card/product-card.component';
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import { HOME_ROUTE, HomeComponent } from './';
     ],
     declarations: [
         HomeComponent,
+        ProductCardComponent
     ],
     entryComponents: [
     ],

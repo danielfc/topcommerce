@@ -1,0 +1,17 @@
+<div class="card" style="width: 12rem;">
+    <img class="card-img-top img-responsive"
+         [src]="product.imagePath"
+         alt="Card image cap">
+    <div class="card-block p-1">
+        <h4 class="card-title">
+            <a [routerLink]="['./product', product.id]" title="{{product.name}}">
+            {{product.name | shorten:20}}
+            </a>
+        </h4>
+        <p class="card-text" title="{{product.description}}">{{product.description | shorten:50}}</p>
+        <p class="card-price text-center" style="font-size: 24px">
+            {{product.price | currency:'USD':true}} <a href="#" class="btn btn-primary btn-sm">
+            <span class="fa fa-cart-plus"title="Add to cart"></span></a>
+        </p>
+    </div>
+</div>
