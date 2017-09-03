@@ -31,6 +31,10 @@
                 "min"
             ],
             "fieldValidateRulesMin": "0"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "changelogDate": "20170903130522",

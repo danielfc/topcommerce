@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -32,6 +33,9 @@ public class Product implements Serializable {
     @DecimalMin(value = "0")
     @Column(name = "price", precision=10, scale=2, nullable = false)
     private BigDecimal price;
+
+    @Column(name = "created_at")
+    private ZonedDateTime createdAt;
 
     @ManyToOne
     private ProductType type;
@@ -84,6 +88,19 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    public ZonedDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public Product createdAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    public void setCreatedAt(ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public ProductType getType() {
         return type;
     }
@@ -125,6 +142,7 @@ public class Product implements Serializable {
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
             ", price='" + getPrice() + "'" +
+            ", createdAt='" + getCreatedAt() + "'" +
             "}";
     }
 }

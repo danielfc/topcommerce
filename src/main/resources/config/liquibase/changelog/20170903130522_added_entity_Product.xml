@@ -34,12 +34,17 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="created_at" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
             <column name="type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="product" columnName="created_at" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

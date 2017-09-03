@@ -41,6 +41,8 @@ describe('Product e2e test', () => {
         expect(productDialogPage.getDescriptionInput()).toMatch('description');
         productDialogPage.setPriceInput('5');
         expect(productDialogPage.getPriceInput()).toMatch('5');
+        productDialogPage.setCreatedAtInput(12310020012301);
+        expect(productDialogPage.getCreatedAtInput()).toMatch('2001-12-31T02:30');
         productDialogPage.typeSelectLastOption();
         productDialogPage.save();
         expect(productDialogPage.getSaveButton().isPresent()).toBeFalsy();
@@ -71,6 +73,7 @@ export class ProductDialogPage {
     nameInput = element(by.css('input#field_name'));
     descriptionInput = element(by.css('input#field_description'));
     priceInput = element(by.css('input#field_price'));
+    createdAtInput = element(by.css('input#field_createdAt'));
     typeSelect = element(by.css('select#field_type'));
 
     getModalTitle() {
@@ -99,6 +102,14 @@ export class ProductDialogPage {
 
     getPriceInput = function () {
         return this.priceInput.getAttribute('value');
+    }
+
+    setCreatedAtInput = function (createdAt) {
+        this.createdAtInput.sendKeys(createdAt);
+    }
+
+    getCreatedAtInput = function () {
+        return this.createdAtInput.getAttribute('value');
     }
 
     typeSelectLastOption = function () {

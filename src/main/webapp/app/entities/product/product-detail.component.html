@@ -16,6 +16,10 @@
         <dd>
             <span>{{product.price}}</span>
         </dd>
+        <dt><span>Created At</span></dt>
+        <dd>
+            <span>{{product.createdAt | date:'medium'}}</span>
+        </dd>
         <dt><span>Type</span></dt>
         <dd>
             <div *ngIf="product.type">

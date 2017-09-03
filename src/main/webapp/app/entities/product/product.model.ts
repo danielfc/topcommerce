@@ -6,6 +6,7 @@ export class Product implements BaseEntity {
         public name?: string,
         public description?: string,
         public price?: number,
+        public createdAt?: any,
         public type?: BaseEntity,
     ) {
     }
