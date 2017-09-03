@@ -43,6 +43,8 @@ describe('Product e2e test', () => {
         expect(productDialogPage.getPriceInput()).toMatch('5');
         productDialogPage.setCreatedAtInput(12310020012301);
         expect(productDialogPage.getCreatedAtInput()).toMatch('2001-12-31T02:30');
+        productDialogPage.setImagePathInput('imagePath');
+        expect(productDialogPage.getImagePathInput()).toMatch('imagePath');
         productDialogPage.typeSelectLastOption();
         productDialogPage.save();
         expect(productDialogPage.getSaveButton().isPresent()).toBeFalsy();
@@ -74,6 +76,7 @@ export class ProductDialogPage {
     descriptionInput = element(by.css('input#field_description'));
     priceInput = element(by.css('input#field_price'));
     createdAtInput = element(by.css('input#field_createdAt'));
+    imagePathInput = element(by.css('input#field_imagePath'));
     typeSelect = element(by.css('select#field_type'));
 
     getModalTitle() {
@@ -110,6 +113,14 @@ export class ProductDialogPage {
 
     getCreatedAtInput = function () {
         return this.createdAtInput.getAttribute('value');
+    }
+
+    setImagePathInput = function (imagePath) {
+        this.imagePathInput.sendKeys(imagePath);
+    }
+
+    getImagePathInput = function () {
+        return this.imagePathInput.getAttribute('value');
     }
 
     typeSelectLastOption = function () {

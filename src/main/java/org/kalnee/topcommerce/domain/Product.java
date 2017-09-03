@@ -37,6 +37,10 @@ public class Product implements Serializable {
     @Column(name = "created_at")
     private ZonedDateTime createdAt;
 
+    @NotNull
+    @Column(name = "image_path", nullable = false)
+    private String imagePath;
+
     @ManyToOne
     private ProductType type;
 
@@ -101,6 +105,19 @@ public class Product implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public Product imagePath(String imagePath) {
+        this.imagePath = imagePath;
+        return this;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public ProductType getType() {
         return type;
     }
@@ -143,6 +160,7 @@ public class Product implements Serializable {
             ", description='" + getDescription() + "'" +
             ", price='" + getPrice() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
+            ", imagePath='" + getImagePath() + "'" +
             "}";
     }
 }

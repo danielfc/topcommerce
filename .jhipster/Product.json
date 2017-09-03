@@ -35,6 +35,13 @@
         {
             "fieldName": "createdAt",
             "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "imagePath",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20170903130522",

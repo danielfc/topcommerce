@@ -60,6 +60,17 @@
                   />
             </div>
         </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_imagePath">Image Path</label>
+            <input type="text" class="form-control" name="imagePath" id="field_imagePath"
+                [(ngModel)]="product.imagePath" required />
+            <div [hidden]="!(editForm.controls.imagePath?.dirty && editForm.controls.imagePath?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.imagePath?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" for="field_type">Type</label>

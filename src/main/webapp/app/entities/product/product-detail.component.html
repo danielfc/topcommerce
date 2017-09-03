@@ -20,6 +20,10 @@
         <dd>
             <span>{{product.createdAt | date:'medium'}}</span>
         </dd>
+        <dt><span>Image Path</span></dt>
+        <dd>
+            <span>{{product.imagePath}}</span>
+        </dd>
         <dt><span>Type</span></dt>
         <dd>
             <div *ngIf="product.type">

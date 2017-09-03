@@ -55,6 +55,9 @@ public class ProductResourceIntTest {
     private static final ZonedDateTime DEFAULT_CREATED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_CREATED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
+    private static final String DEFAULT_IMAGE_PATH = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_PATH = "BBBBBBBBBB";
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -95,7 +98,8 @@ public class ProductResourceIntTest {
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
             .price(DEFAULT_PRICE)
-            .createdAt(DEFAULT_CREATED_AT);
+            .createdAt(DEFAULT_CREATED_AT)
+            .imagePath(DEFAULT_IMAGE_PATH);
         return product;
     }
 
@@ -123,6 +127,7 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testProduct.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testProduct.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
+        assertThat(testProduct.getImagePath()).isEqualTo(DEFAULT_IMAGE_PATH);
     }
 
     @Test
@@ -200,6 +205,24 @@ public class ProductResourceIntTest {
 
     @Test
     @Transactional
+    public void checkImagePathIsRequired() throws Exception {
+        int databaseSizeBeforeTest = productRepository.findAll().size();
+        // set the field null
+        product.setImagePath(null);
+
+        // Create the Product, which fails.
+
+        restProductMockMvc.perform(post("/api/products")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(product)))
+            .andExpect(status().isBadRequest());
+
+        List<Product> productList = productRepository.findAll();
+        assertThat(productList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllProducts() throws Exception {
         // Initialize the database
         productRepository.saveAndFlush(product);
@@ -212,7 +235,8 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.intValue())))
-            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))));
+            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))))
+            .andExpect(jsonPath("$.[*].imagePath").value(hasItem(DEFAULT_IMAGE_PATH.toString())));
     }
 
     @Test
@@ -229,7 +253,8 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.intValue()))
-            .andExpect(jsonPath("$.createdAt").value(sameInstant(DEFAULT_CREATED_AT)));
+            .andExpect(jsonPath("$.createdAt").value(sameInstant(DEFAULT_CREATED_AT)))
+            .andExpect(jsonPath("$.imagePath").value(DEFAULT_IMAGE_PATH.toString()));
     }
 
     @Test
@@ -253,7 +278,8 @@ public class ProductResourceIntTest {
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .price(UPDATED_PRICE)
-            .createdAt(UPDATED_CREATED_AT);
+            .createdAt(UPDATED_CREATED_AT)
+            .imagePath(UPDATED_IMAGE_PATH);
 
         restProductMockMvc.perform(put("/api/products")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -268,6 +294,7 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testProduct.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testProduct.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
+        assertThat(testProduct.getImagePath()).isEqualTo(UPDATED_IMAGE_PATH);
     }
 
     @Test
