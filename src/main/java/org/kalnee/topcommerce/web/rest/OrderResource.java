@@ -73,7 +73,7 @@ public class OrderResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/orders")
-    @Secured(ADMIN)
+    @Secured({ADMIN, MANAGER})
     @Timed
     public ResponseEntity<Order> updateOrder(@Valid @RequestBody Order order) throws URISyntaxException {
         log.debug("REST request to update Order : {}", order);

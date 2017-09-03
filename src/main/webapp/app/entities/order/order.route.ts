@@ -63,7 +63,7 @@ export const orderPopupRoute: Routes = [
         path: 'order/:id/edit',
         component: OrderPopupComponent,
         data: {
-            authorities: ['ROLE_ADMIN'],
+            authorities: ['ROLE_ADMIN', 'ROLE_MANAGER'],
             pageTitle: 'Orders'
         },
         canActivate: [UserRouteAccessService],
