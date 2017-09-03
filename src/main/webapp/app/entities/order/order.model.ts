@@ -12,7 +12,9 @@ export class Order implements BaseEntity {
         public id?: number,
         public status?: OrderStatus,
         public createdAt?: any,
+        public code?: string,
         public user?: User,
+        public orderItems?: BaseEntity[],
     ) {
     }
 }

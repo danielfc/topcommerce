@@ -38,6 +38,8 @@ describe('Order e2e test', () => {
         orderDialogPage.statusSelectLastOption();
         orderDialogPage.setCreatedAtInput(12310020012301);
         expect(orderDialogPage.getCreatedAtInput()).toMatch('2001-12-31T02:30');
+        orderDialogPage.setCodeInput('code');
+        expect(orderDialogPage.getCodeInput()).toMatch('code');
         orderDialogPage.userSelectLastOption();
         orderDialogPage.save();
         expect(orderDialogPage.getSaveButton().isPresent()).toBeFalsy();
@@ -67,6 +69,7 @@ export class OrderDialogPage {
     closeButton = element(by.css('button.close'));
     statusSelect = element(by.css('select#field_status'));
     createdAtInput = element(by.css('input#field_createdAt'));
+    codeInput = element(by.css('input#field_code'));
     userSelect = element(by.css('select#field_user'));
 
     getModalTitle() {
@@ -90,6 +93,14 @@ export class OrderDialogPage {
 
     getCreatedAtInput = function () {
         return this.createdAtInput.getAttribute('value');
+    }
+
+    setCodeInput = function (code) {
+        this.codeInput.sendKeys(code);
+    }
+
+    getCodeInput = function () {
+        return this.codeInput.getAttribute('value');
     }
 
     userSelectLastOption = function () {

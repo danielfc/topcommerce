@@ -50,6 +50,9 @@ public class OrderResourceIntTest {
     private static final ZonedDateTime DEFAULT_CREATED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_CREATED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
+    private static final String DEFAULT_CODE = "AAAAAAAAAA";
+    private static final String UPDATED_CODE = "BBBBBBBBBB";
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -91,7 +94,8 @@ public class OrderResourceIntTest {
     public static Order createEntity(EntityManager em) {
         Order order = new Order()
             .status(DEFAULT_STATUS)
-            .createdAt(DEFAULT_CREATED_AT);
+            .createdAt(DEFAULT_CREATED_AT)
+            .code(DEFAULT_CODE);
         return order;
     }
 
@@ -117,6 +121,7 @@ public class OrderResourceIntTest {
         Order testOrder = orderList.get(orderList.size() - 1);
         assertThat(testOrder.getStatus()).isEqualTo(DEFAULT_STATUS);
         assertThat(testOrder.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
+        assertThat(testOrder.getCode()).isEqualTo(DEFAULT_CODE);
     }
 
     @Test
@@ -158,6 +163,24 @@ public class OrderResourceIntTest {
 
     @Test
     @Transactional
+    public void checkCodeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = orderRepository.findAll().size();
+        // set the field null
+        order.setCode(null);
+
+        // Create the Order, which fails.
+
+        restOrderMockMvc.perform(post("/api/orders")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(order)))
+            .andExpect(status().isBadRequest());
+
+        List<Order> orderList = orderRepository.findAll();
+        assertThat(orderList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllOrders() throws Exception {
         // Initialize the database
         orderRepository.saveAndFlush(order);
@@ -168,7 +191,8 @@ public class OrderResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(order.getId().intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))));
+            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))))
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())));
     }
 
     @Test
@@ -183,7 +207,8 @@ public class OrderResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(order.getId().intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.createdAt").value(sameInstant(DEFAULT_CREATED_AT)));
+            .andExpect(jsonPath("$.createdAt").value(sameInstant(DEFAULT_CREATED_AT)))
+            .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()));
     }
 
     @Test
@@ -206,7 +231,8 @@ public class OrderResourceIntTest {
         Order updatedOrder = orderRepository.findOne(order.getId());
         updatedOrder
             .status(UPDATED_STATUS)
-            .createdAt(UPDATED_CREATED_AT);
+            .createdAt(UPDATED_CREATED_AT)
+            .code(UPDATED_CODE);
 
         restOrderMockMvc.perform(put("/api/orders")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -219,6 +245,7 @@ public class OrderResourceIntTest {
         Order testOrder = orderList.get(orderList.size() - 1);
         assertThat(testOrder.getStatus()).isEqualTo(UPDATED_STATUS);
         assertThat(testOrder.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
+        assertThat(testOrder.getCode()).isEqualTo(UPDATED_CODE);
     }
 
     @Test

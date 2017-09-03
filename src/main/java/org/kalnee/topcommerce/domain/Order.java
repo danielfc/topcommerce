@@ -1,10 +1,13 @@
 package org.kalnee.topcommerce.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 import org.kalnee.topcommerce.domain.enumeration.OrderStatus;
@@ -30,8 +33,16 @@ public class Order implements Serializable {
     @Column(name = "created_at", nullable = false)
     private ZonedDateTime createdAt;
 
+    @NotNull
+    @Column(name = "code", nullable = false)
+    private String code;
+
     @ManyToOne
     private User user;
+
+    @OneToMany(mappedBy = "order")
+    @JsonIgnore
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -68,6 +79,19 @@ public class Order implements Serializable {
         this.createdAt = createdAt;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public Order code(String code) {
+        this.code = code;
+        return this;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public User getUser() {
         return user;
     }
@@ -79,6 +103,31 @@ public class Order implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public Order orderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+        return this;
+    }
+
+    public Order addOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+        orderItem.setOrder(this);
+        return this;
+    }
+
+    public Order removeOrderItem(OrderItem orderItem) {
+        this.orderItems.remove(orderItem);
+        orderItem.setOrder(null);
+        return this;
+    }
+
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
@@ -108,6 +157,7 @@ public class Order implements Serializable {
             "id=" + getId() +
             ", status='" + getStatus() + "'" +
             ", createdAt='" + getCreatedAt() + "'" +
+            ", code='" + getCode() + "'" +
             "}";
     }
 }

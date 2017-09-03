@@ -8,6 +8,12 @@
             "otherEntityField": "login",
             "ownerSide": true,
             "otherEntityRelationshipName": "order"
+        },
+        {
+            "relationshipName": "orderItem",
+            "otherEntityName": "orderItem",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "order"
         }
     ],
     "fields": [
@@ -19,6 +25,13 @@
         {
             "fieldName": "createdAt",
             "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
