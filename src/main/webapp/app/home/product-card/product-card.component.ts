@@ -1,5 +1,6 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {Product} from '../../entities/product/product.model';
+import {CartService} from '../../cart/cart.service';
 
 @Component({
     selector: 'jhi-product-card',
@@ -13,10 +14,14 @@ export class ProductCardComponent implements OnInit {
     @Input()
     product: Product;
 
-    constructor() {
+    constructor(private cartService: CartService) {
     }
 
     ngOnInit() {
+    }
+
+    addToCart(product: Product) {
+        this.cartService.addProduct(product);
     }
 
 }

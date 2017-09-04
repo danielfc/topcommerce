@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
 
-import { Account, LoginModalService, Principal } from '../shared';
+import {Account, LoginModalService, Principal} from '../shared';
 import {Product} from '../entities/product/product.model';
 import {ProductService} from '../entities/product/product.service';
-import {Observable} from 'rxjs/Observable';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
-import {createRequestOption} from '../shared/model/request-util';
 import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
+import {LocalStorageService} from 'ng2-webstorage';
 
 @Component({
     selector: 'jhi-home',
@@ -33,7 +32,8 @@ export class HomeComponent implements OnInit {
         private eventManager: JhiEventManager,
         private productService: ProductService,
         private alertService: JhiAlertService,
-        private parseLinks: JhiParseLinks
+        private parseLinks: JhiParseLinks,
+        private localStorage: LocalStorageService
     ) {
     }
 

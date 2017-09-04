@@ -21,6 +21,8 @@ import {
     PageRibbonComponent,
     ProfileService
 } from './layouts';
+import {CartService} from './cart/cart.service';
+import {TopcommerceCheckoutModule} from './checkout/checkout.module';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
@@ -34,6 +36,7 @@ import {
         TopcommerceAdminModule,
         TopcommerceAccountModule,
         TopcommerceEntityModule,
+        TopcommerceCheckoutModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -47,7 +50,8 @@ import {
         ProfileService,
         customHttpProvider(),
         PaginationConfig,
-        UserRouteAccessService
+        UserRouteAccessService,
+        CartService
     ],
     bootstrap: [ JhiMainComponent ]
 })

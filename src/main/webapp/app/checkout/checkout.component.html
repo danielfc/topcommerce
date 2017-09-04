@@ -1,0 +1,44 @@
+<h2>Checkout</h2>
+<div *ngIf="orderItems.length > 0; else noOrderItems">
+    <div class="container-fluid mt-3">
+        <h5>Order Items</h5>
+        <form>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let orderItem of orderItems">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img [src]="orderItem.product.imagePath" class="max-height-s">
+                        </div>
+                        <div class="col-md-5 p-1">
+                            <p class="small">{{orderItem.product.name}}</p>
+                        </div>
+                        <div class="col-md 2 p-1">
+                            <p>{{orderItem.product.price | currency:'USD':true}}</p>
+                        </div>
+                        <div class="col-md-2 p-1">
+                            <input type="number" id="quantity" name="quantity" class="form-control" min="0"
+                                   placeholder="Quantity.." [(ngModel)]="orderItem.quantity">
+                        </div>
+                        <div class="col-md-1">
+                            <button class="btn btn-danger btn-sm mt-1" type="button"
+                                    (click)="removeItem(orderItem.product.id)">X
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <hr>
+    <div class="container-fluid">
+        <h5>Payment</h5>
+        <p>Payment stuff</p>
+    </div>
+    <hr>
+    <div class="container-fluid text-center">
+        <button class="btn btn-success" type="button">Finish</button>
+    </div>
+</div>
+<ng-template #noOrderItems>
+    <p>There are no products in your basket.</p>
+</ng-template>

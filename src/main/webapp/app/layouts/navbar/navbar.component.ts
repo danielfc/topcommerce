@@ -6,6 +6,8 @@ import { ProfileService } from '../profiles/profile.service';
 import { Principal, LoginModalService, LoginService } from '../../shared';
 
 import { VERSION, DEBUG_INFO_ENABLED } from '../../app.constants';
+import {CartService} from '../../cart/cart.service';
+import {Product} from '../../entities/product/product.model';
 
 @Component({
     selector: 'jhi-navbar',
@@ -22,13 +24,15 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    cartQuantity = 0;
 
     constructor(
         private loginService: LoginService,
         private principal: Principal,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router
+        private router: Router,
+        private cartService: CartService
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -39,6 +43,8 @@ export class NavbarComponent implements OnInit {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+        this.cartQuantity = this.cartService.getProducts().length;
+        this.cartService.onCartChanged.subscribe((products: Product[]) => this.cartQuantity = products.length);
     }
 
     collapseNavbar() {
