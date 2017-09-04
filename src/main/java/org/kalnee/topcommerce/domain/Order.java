@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+import static javax.persistence.FetchType.EAGER;
 import static org.kalnee.topcommerce.domain.enumeration.OrderStatus.CREATED;
 
 /**
@@ -40,7 +41,7 @@ public class Order implements Serializable {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST, fetch = EAGER)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove

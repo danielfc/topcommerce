@@ -1,4 +1,3 @@
-
 <div *ngIf="order">
     <h2><span>Order</span> {{order.id}}</h2>
     <jhi-alert></jhi-alert>
@@ -7,7 +6,7 @@
     <dl class="row-md jh-entity-details">
         <dt><span>Status</span></dt>
         <dd>
-            <span>{{order.status}}</span>
+            <span class="badge badge-primary">{{order.status}}</span>
         </dd>
         <dt><span>Created At</span></dt>
         <dd>
@@ -23,6 +22,27 @@
                 {{order.user?.login}}
             </dd>
         </div>
+        <dt>
+            <span>Products</span>
+        </dt>
+        <dd>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let orderItem of order.orderItems">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <img [src]="orderItem.product.imagePath" [alt]="orderItem.product.name"
+                                 class="img-fluid max-height-xs">
+                        </div>
+                        <div class="col-md-2">
+                            {{orderItem.product.name}} ({{orderItem.quantity}})
+                        </div>
+                        <div class="col-md-2">
+                            {{orderItem.product.price | currency:'USD':true}}
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </dd>
     </dl>
 
     <button type="submit"
@@ -32,6 +52,7 @@
     </button>
 
     <button type="button"
+            *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MANAGER']"
             [routerLink]="['/', { outlets: { popup: 'order/'+ order.id + '/edit'} }]"
             replaceUrl="true"
             class="btn btn-primary">

@@ -14,17 +14,17 @@
             <th jhiSortBy="status"><span>Status</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="createdAt"><span>Created At</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="user.login"><span>User</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="user.login" *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MANAGER']"><span>User</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let order of orders ;trackBy: trackId">
                 <td><a [routerLink]="['../order', order.id ]">{{order.id}}</a></td>
-                <td>{{order.status}}</td>
+                <td><span class="badge badge-primary">{{order.status}}</span></td>
                 <td>{{order.createdAt | date:'medium'}}</td>
                 <td>{{order.code}}</td>
-                <td>
+                <td *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MANAGER']">
                     {{order.user?.login}}
                 </td>
                 <td class="text-right">
