@@ -1,6 +1,8 @@
 package org.kalnee.topcommerce.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -25,6 +27,7 @@ public class OrderItem implements Serializable {
     private Integer quantity;
 
     @ManyToOne
+    @JsonIgnore
     private Order order;
 
     @ManyToOne

@@ -36,4 +36,10 @@ export class CartService {
     store() {
         this.localStorage.store(CART_KEY, JSON.stringify(this.products));
     }
+
+    clear() {
+        this.localStorage.clear(CART_KEY);
+        this.products = [];
+        this.onCartChanged.next(this.products.slice());
+    }
 }

@@ -2,6 +2,7 @@ package org.kalnee.topcommerce.service;
 
 import org.kalnee.topcommerce.domain.Order;
 import org.kalnee.topcommerce.repository.OrderRepository;
+import org.kalnee.topcommerce.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -20,8 +21,11 @@ public class OrderService {
     private final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository orderRepository;
-    public OrderService(OrderRepository orderRepository) {
+    private final UserService userService;
+
+    public OrderService(OrderRepository orderRepository, UserService userService) {
         this.orderRepository = orderRepository;
+        this.userService = userService;
     }
 
     /**
@@ -32,6 +36,8 @@ public class OrderService {
      */
     public Order save(Order order) {
         log.debug("Request to save Order : {}", order);
+        order.setUser(userService.getUserWithAuthorities());
+        order.getOrderItems().forEach(o -> o.setOrder(order));
         return orderRepository.save(order);
     }
 

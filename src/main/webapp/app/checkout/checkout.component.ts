@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CheckoutService} from './checkout.service';
-import {OrderItem} from './order/order-item.model';
+import {OrderItem} from '../entities/order-item/order-item.model';
 
 @Component({
     selector: 'jhi-checkout',
@@ -21,6 +21,10 @@ export class CheckoutComponent implements OnInit {
 
     removeItem(productId: number) {
         this.checkoutService.removeItem(productId);
+    }
+
+    finish() {
+        this.checkoutService.finish();
     }
 
 }

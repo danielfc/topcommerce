@@ -1,17 +1,15 @@
 package org.kalnee.topcommerce.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+import org.kalnee.topcommerce.domain.enumeration.OrderStatus;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.kalnee.topcommerce.domain.enumeration.OrderStatus;
+import java.util.Set;
+import java.util.UUID;
 
 import static org.kalnee.topcommerce.domain.enumeration.OrderStatus.CREATED;
 
@@ -32,20 +30,17 @@ public class Order implements Serializable {
     @Column(name = "status")
     private OrderStatus status = CREATED;
 
-    @NotNull
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private ZonedDateTime createdAt = ZonedDateTime.now();
 
-    @NotNull
-    @Column(name = "code", nullable = false)
-    private String code;
+    @Column(name = "code", nullable = false, updatable = false)
+    private String code = UUID.randomUUID().toString();
 
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "order")
-    @JsonIgnore
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private Set<OrderItem> orderItems = new HashSet<>();
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove

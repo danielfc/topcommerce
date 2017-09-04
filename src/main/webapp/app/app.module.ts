@@ -23,6 +23,7 @@ import {
 } from './layouts';
 import {CartService} from './cart/cart.service';
 import {TopcommerceCheckoutModule} from './checkout/checkout.module';
+import {OrderService} from './entities/order/order.service';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
@@ -51,7 +52,8 @@ import {TopcommerceCheckoutModule} from './checkout/checkout.module';
         customHttpProvider(),
         PaginationConfig,
         UserRouteAccessService,
-        CartService
+        CartService,
+        OrderService
     ],
     bootstrap: [ JhiMainComponent ]
 })

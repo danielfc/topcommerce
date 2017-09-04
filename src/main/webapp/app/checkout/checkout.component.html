@@ -1,8 +1,9 @@
 <h2>Checkout</h2>
+<jhi-alert></jhi-alert>
 <div *ngIf="orderItems.length > 0; else noOrderItems">
-    <div class="container-fluid mt-3">
-        <h5>Order Items</h5>
-        <form>
+    <form novalidate (ngSubmit)="finish()" #form="ngForm">
+        <div class="container-fluid mt-3">
+            <h5><span class="fa fa-shopping-cart"></span> Order Items</h5>
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let orderItem of orderItems">
                     <div class="row">
@@ -27,17 +28,24 @@
                     </div>
                 </li>
             </ul>
-        </form>
-    </div>
-    <hr>
-    <div class="container-fluid">
-        <h5>Payment</h5>
-        <p>Payment stuff</p>
-    </div>
-    <hr>
-    <div class="container-fluid text-center">
-        <button class="btn btn-success" type="button">Finish</button>
-    </div>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <h5><span class="fa fa-address-card"></span> Shipping Address</h5>
+            <p>Address stuff</p>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <h5><span class="fa fa-credit-card"></span> Payment</h5>
+            <p>Payment stuff</p>
+        </div>
+        <hr>
+        <div class="container-fluid text-center">
+            <button class="btn btn-success" type="submit" [disabled]="form.invalid">
+                <span class="fa fa-shopping-bag"></span> Finish
+            </button>
+        </div>
+    </form>
 </div>
 <ng-template #noOrderItems>
     <p>There are no products in your basket.</p>

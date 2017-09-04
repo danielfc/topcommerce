@@ -44,7 +44,6 @@ const ENTITY_STATES = [
         OrderDeletePopupComponent,
     ],
     providers: [
-        OrderService,
         OrderPopupService,
         OrderResolvePagingParams,
     ],
