@@ -1,22 +1,23 @@
 package org.kalnee.topcommerce.domain;
 
-import org.kalnee.topcommerce.config.Constants;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.validator.constraints.Email;
+import org.kalnee.topcommerce.config.Constants;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
-import java.time.Instant;
 
 /**
  * A user.
@@ -91,6 +92,20 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    @Embedded
+    @Valid
+    private Address homeAddress;
+
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "address", column = @Column(name = "billing_address")),
+        @AttributeOverride(name = "country", column = @Column(name = "billing_country")),
+        @AttributeOverride(name = "city", column = @Column(name = "billing_city")),
+        @AttributeOverride(name = "state", column = @Column(name = "billing_state")),
+        @AttributeOverride(name = "postalCode", column = @Column(name = "billing_postal_code"))})
+    @Valid
+    private Address billingAddress;
 
     public Long getId() {
         return id;
@@ -194,6 +209,22 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
     }
 
     @Override

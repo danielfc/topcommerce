@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="20170903133000-2" author="danielfc">
+        <addColumn tableName="jhi_user">
+            <column name="address" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="jhi_user">
+            <column name="country" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="jhi_user">
+            <column name="state" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="jhi_user">
+            <column name="city" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="jhi_user">
+            <column name="postal_code" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="jhi_user">
+            <column name="billing_address" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="jhi_user">
+            <column name="billing_country" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="jhi_user">
+            <column name="billing_state" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="jhi_user">
+            <column name="billing_city" type="varchar(255)"/>
+        </addColumn>
+        <addColumn tableName="jhi_user">
+            <column name="billing_postal_code" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

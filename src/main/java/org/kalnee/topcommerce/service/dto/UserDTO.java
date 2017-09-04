@@ -2,12 +2,14 @@ package org.kalnee.topcommerce.service.dto;
 
 import org.kalnee.topcommerce.config.Constants;
 
+import org.kalnee.topcommerce.domain.Address;
 import org.kalnee.topcommerce.domain.Authority;
 import org.kalnee.topcommerce.domain.User;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
@@ -53,6 +55,12 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    @Valid
+    private Address homeAddress;
+
+    @Valid
+    private Address billingAddress;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -62,7 +70,7 @@ public class UserDTO {
             user.getEmail(), user.getActivated(), user.getImageUrl(), user.getLangKey(),
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toSet()), user.getHomeAddress(), user.getBillingAddress());
     }
 
     public UserDTO(Long id, String login, String firstName, String lastName,
@@ -83,6 +91,17 @@ public class UserDTO {
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedDate = lastModifiedDate;
         this.authorities = authorities;
+    }
+
+    public UserDTO(Long id, String login, String firstName, String lastName,
+                   String email, boolean activated, String imageUrl, String langKey,
+                   String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
+                   Set<String> authorities, Address homeAddress, Address billingAddress) {
+
+        this(id, login, firstName, lastName, email, activated, imageUrl, langKey, createdBy, createdDate, lastModifiedBy,
+            lastModifiedDate, authorities);
+        this.homeAddress = homeAddress;
+        this.billingAddress = billingAddress;
     }
 
     public Long getId() {
@@ -147,6 +166,14 @@ public class UserDTO {
 
     public Set<String> getAuthorities() {
         return authorities;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
     }
 
     @Override

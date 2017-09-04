@@ -1,5 +1,6 @@
 package org.kalnee.topcommerce.service;
 
+import org.kalnee.topcommerce.domain.Address;
 import org.kalnee.topcommerce.domain.Authority;
 import org.kalnee.topcommerce.domain.User;
 import org.kalnee.topcommerce.repository.AuthorityRepository;
@@ -144,13 +145,16 @@ public class UserService {
      * @param langKey language key
      * @param imageUrl image URL of user
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
+    public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl,
+                           Address homeAddress, Address billingAddress) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setEmail(email);
             user.setLangKey(langKey);
             user.setImageUrl(imageUrl);
+            user.setHomeAddress(homeAddress);
+            user.setBillingAddress(billingAddress);
             log.debug("Changed Information for User: {}", user);
         });
     }
