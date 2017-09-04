@@ -26,6 +26,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import static org.kalnee.topcommerce.security.AuthoritiesConstants.ADMIN;
+import static org.kalnee.topcommerce.security.AuthoritiesConstants.MANAGER;
+
 /**
  * REST controller for managing Product.
  */
@@ -50,7 +53,7 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/products")
-    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.MANAGER})
+    @Secured({ADMIN, MANAGER})
     @Timed
     public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to save Product : {}", product);
@@ -73,7 +76,7 @@ public class ProductResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/products")
-    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.MANAGER})
+    @Secured({ADMIN, MANAGER})
     @Timed
     public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to update Product : {}", product);
@@ -122,7 +125,7 @@ public class ProductResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/products/{id}")
-    @Secured(AuthoritiesConstants.ADMIN)
+    @Secured(ADMIN)
     @Timed
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         log.debug("REST request to delete Product : {}", id);

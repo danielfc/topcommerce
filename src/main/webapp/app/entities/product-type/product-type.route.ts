@@ -33,7 +33,7 @@ export const productTypeRoute: Routes = [
             'pagingParams': ProductTypeResolvePagingParams
         },
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_MANAGER'],
             pageTitle: 'ProductTypes'
         },
         canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const productTypeRoute: Routes = [
         path: 'product-type/:id',
         component: ProductTypeDetailComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_MANAGER'],
             pageTitle: 'ProductTypes'
         },
         canActivate: [UserRouteAccessService]
@@ -53,7 +53,7 @@ export const productTypePopupRoute: Routes = [
         path: 'product-type-new',
         component: ProductTypePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_MANAGER'],
             pageTitle: 'ProductTypes'
         },
         canActivate: [UserRouteAccessService],
@@ -63,7 +63,7 @@ export const productTypePopupRoute: Routes = [
         path: 'product-type/:id/edit',
         component: ProductTypePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN', 'ROLE_MANAGER'],
             pageTitle: 'ProductTypes'
         },
         canActivate: [UserRouteAccessService],
@@ -73,7 +73,7 @@ export const productTypePopupRoute: Routes = [
         path: 'product-type/:id/delete',
         component: ProductTypeDeletePopupComponent,
         data: {
-            authorities: ['ROLE_USER'],
+            authorities: ['ROLE_ADMIN'],
             pageTitle: 'ProductTypes'
         },
         canActivate: [UserRouteAccessService],

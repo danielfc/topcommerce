@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import org.kalnee.topcommerce.domain.ProductType;
 
 import org.kalnee.topcommerce.repository.ProductTypeRepository;
+import org.kalnee.topcommerce.security.AuthoritiesConstants;
 import org.kalnee.topcommerce.web.rest.util.HeaderUtil;
 import org.kalnee.topcommerce.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,6 +25,9 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.kalnee.topcommerce.security.AuthoritiesConstants.ADMIN;
+import static org.kalnee.topcommerce.security.AuthoritiesConstants.MANAGER;
 
 /**
  * REST controller for managing ProductType.
@@ -48,6 +53,7 @@ public class ProductTypeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/product-types")
+    @Secured({ADMIN, MANAGER})
     @Timed
     public ResponseEntity<ProductType> createProductType(@Valid @RequestBody ProductType productType) throws URISyntaxException {
         log.debug("REST request to save ProductType : {}", productType);
@@ -70,6 +76,7 @@ public class ProductTypeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/product-types")
+    @Secured({ADMIN, MANAGER})
     @Timed
     public ResponseEntity<ProductType> updateProductType(@Valid @RequestBody ProductType productType) throws URISyntaxException {
         log.debug("REST request to update ProductType : {}", productType);
@@ -118,6 +125,7 @@ public class ProductTypeResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/product-types/{id}")
+    @Secured(ADMIN)
     @Timed
     public ResponseEntity<Void> deleteProductType(@PathVariable Long id) {
         log.debug("REST request to delete ProductType : {}", id);
