@@ -1,8 +1,10 @@
-import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit, AfterViewInit, Renderer, ElementRef} from '@angular/core';
+import {NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
-import { Register } from './register.service';
-import { LoginModalService } from '../../shared';
+import {Register} from './register.service';
+import {LoginModalService} from '../../shared';
+
+const RECAPTCHA_KEY = '6LfDbS8UAAAAAFgSe2iOLg390gPY8_-eK4bOK3rF';
 
 @Component({
     selector: 'jhi-register',
@@ -18,13 +20,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     registerAccount: any;
     success: boolean;
     modalRef: NgbModalRef;
+    reCaptchaKey = RECAPTCHA_KEY;
+    reCaptchaResolved: boolean;
 
-    constructor(
-        private loginModalService: LoginModalService,
-        private registerService: Register,
-        private elementRef: ElementRef,
-        private renderer: Renderer
-    ) {
+    constructor(private loginModalService: LoginModalService,
+                private registerService: Register,
+                private elementRef: ElementRef,
+                private renderer: Renderer) {
     }
 
     ngOnInit() {
@@ -64,5 +66,10 @@ export class RegisterComponent implements OnInit, AfterViewInit {
         } else {
             this.error = 'ERROR';
         }
+    }
+
+    resolved(captchaResponse: string) {
+        console.log(`Resolved captcha with response ${captchaResponse}:`);
+        this.reCaptchaResolved = true;
     }
 }

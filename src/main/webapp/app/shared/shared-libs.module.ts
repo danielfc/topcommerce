@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgJhipsterModule } from 'ng-jhipster';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CookieModule } from 'ngx-cookie';
+import {RecaptchaModule} from 'ng-recaptcha';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import { CookieModule } from 'ngx-cookie';
             alertAsToast: false,
         }),
         InfiniteScrollModule,
-        CookieModule.forRoot()
+        CookieModule.forRoot(),
+        RecaptchaModule.forRoot()
     ],
     exports: [
         FormsModule,
@@ -23,7 +25,8 @@ import { CookieModule } from 'ngx-cookie';
         CommonModule,
         NgbModule,
         NgJhipsterModule,
-        InfiniteScrollModule
+        InfiniteScrollModule,
+        RecaptchaModule
     ]
 })
 export class TopcommerceSharedLibsModule {}
