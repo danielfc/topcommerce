@@ -17,9 +17,12 @@ export class CartService {
     }
 
     addProduct(product: Product) {
-        this.products.push(product);
-        this.onCartChanged.next(this.products.slice());
-        this.store();
+        const index = this.products.findIndex((p) => product.id === p.id);
+        if (index === -1) {
+            this.products.push(product);
+            this.onCartChanged.next(this.products.slice());
+            this.store();
+        }
     }
 
     removeProduct(id: number) {
