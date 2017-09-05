@@ -17,6 +17,7 @@
     </button>
 
     <button type="button"
+            *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']"
             [routerLink]="['/', { outlets: { popup: 'product-type/'+ productType.id + '/edit'} }]"
             replaceUrl="true"
             class="btn btn-primary">

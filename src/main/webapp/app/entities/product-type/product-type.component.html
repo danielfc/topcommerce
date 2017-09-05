@@ -1,7 +1,9 @@
 <div>
     <h2>
         <span>Product Types</span>
-        <button class="btn btn-primary float-right jh-create-entity create-product-type" [routerLink]="['/', { outlets: { popup: ['product-type-new'] } }]">
+        <button class="btn btn-primary float-right jh-create-entity create-product-type"
+                *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MANAGER']"
+                [routerLink]="['/', { outlets: { popup: ['product-type-new'] } }]">
             <span class="fa fa-plus"></span>
             <span >
             Create new Product Type
@@ -34,6 +36,7 @@
                             <span class="hidden-md-down">View</span>
                         </button>
                         <button type="submit"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MANAGER']"
                                 [routerLink]="['/', { outlets: { popup: 'product-type/'+ productType.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
@@ -41,6 +44,7 @@
                             <span class="hidden-md-down">Edit</span>
                         </button>
                         <button type="submit"
+                                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                 [routerLink]="['/', { outlets: { popup: 'product-type/'+ productType.id + '/delete'} }]"
                                 replaceUrl="true"
                                 class="btn btn-danger btn-sm">
