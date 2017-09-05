@@ -16,6 +16,7 @@ import {
     UserService
 } from './';
 import {ShortenPipe} from './shorten/shorten.pipe';
+import {PointerDirective} from './pointer/pointer.directive';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import {ShortenPipe} from './shorten/shorten.pipe';
     declarations: [
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
-        ShortenPipe
+        ShortenPipe,
+        PointerDirective
     ],
     providers: [
         LoginService,
@@ -44,7 +46,8 @@ import {ShortenPipe} from './shorten/shorten.pipe';
         JhiLoginModalComponent,
         HasAnyAuthorityDirective,
         DatePipe,
-        ShortenPipe
+        ShortenPipe,
+        PointerDirective
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

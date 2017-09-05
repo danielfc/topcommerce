@@ -14,7 +14,7 @@
             <p class="card-text" title="{{product.description}}">{{product.description | shorten:50}}</p>
             <p class="card-price text-center" style="font-size: 24px">
                 {{product.price | currency:'USD':true}}
-                <button type="button" class="btn btn-primary btn-sm" (click)="addToCart(product)">
+                <button type="button" jhiPointer class="btn btn-primary btn-sm" (click)="addToCart(product)">
                     <span class="fa fa-cart-plus" title="Add to cart"></span></button>
             </p>
         </dd>

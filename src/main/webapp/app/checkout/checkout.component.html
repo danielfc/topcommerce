@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="col-md-1">
-                            <button class="btn btn-danger btn-sm mt-1" type="button"
+                            <button class="btn btn-danger btn-sm mt-1" type="button" jhiPointer
                                     (click)="removeItem(orderItem.product.id)">X
                             </button>
                         </div>
@@ -68,7 +68,7 @@
             </p>
             <p>Stripe <a href="https://stripe.com/docs/testing" target="_blank">testing documentation.</a></p>
             <div class="container-fluid text-center">
-                <button class="btn btn-success" type="submit" [disabled]="form.invalid">
+                <button class="btn btn-success" jhiPointer type="submit" [disabled]="form.invalid">
                     <span class="fa fa-shopping-bag"></span> Purchase
                 </button>
             </div>
