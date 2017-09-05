@@ -36,7 +36,8 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
                         configFileName: 'tsconfig-aot.json'
                     },
                 },
-                { loader: 'angular2-template-loader' }
+                { loader: 'angular2-template-loader' },
+                { loader: 'angular-router-loader'}
             ],
             exclude: ['node_modules/generator-jhipster']
         },

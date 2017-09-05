@@ -24,6 +24,7 @@ import {
 import {CartService} from './cart/cart.service';
 import {TopcommerceCheckoutModule} from './checkout/checkout.module';
 import {OrderService} from './entities/order/order.service';
+import {TopcommerceAboutModule} from './about/about.module';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
@@ -37,7 +38,8 @@ import {OrderService} from './entities/order/order.service';
         TopcommerceAdminModule,
         TopcommerceAccountModule,
         TopcommerceEntityModule,
-        TopcommerceCheckoutModule
+        TopcommerceCheckoutModule,
+        TopcommerceAboutModule
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
