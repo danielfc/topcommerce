@@ -80,7 +80,7 @@ public class OrderResource {
         if (order.getId() == null) {
             return createOrder(order);
         }
-        Order result = orderService.save(order);
+        Order result = orderService.update(order);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, order.getId().toString()))
             .body(result);

@@ -45,6 +45,17 @@ public class OrderService {
     }
 
     /**
+     * Update a order.
+     *
+     * @param order the entity to be updated
+     * @return the updated entity
+     */
+    public Order update(Order order) {
+        log.debug("Request to update Order : {}", order);
+        return orderRepository.save(order);
+    }
+
+    /**
      *  Get all the orders.
      *
      *  @param pageable the pagination information
