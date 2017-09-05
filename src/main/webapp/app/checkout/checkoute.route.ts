@@ -8,7 +8,7 @@ export const CHECKOUT_ROUTE: Route = {
     component: CheckoutComponent,
     data: {
         authorities: ['ROLE_USER'],
-        pageTitle: 'Checkout'
+        pageTitle: 'Checkout',
     },
     canActivate: [UserRouteAccessService]
 };

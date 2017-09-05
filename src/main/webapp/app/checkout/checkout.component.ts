@@ -1,24 +1,36 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CheckoutService} from './checkout.service';
 import {OrderItem} from '../entities/order-item/order-item.model';
+import {AccountService} from '../shared/auth/account.service';
+import {Address} from '../account/address.model';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'jhi-checkout',
     templateUrl: './checkout.component.html',
     styles: []
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
 
     orderItems: OrderItem[];
     total: number;
+    address: Address;
+    private accountSubscription: Subscription;
 
-    constructor(private checkoutService: CheckoutService) {
+    constructor(private checkoutService: CheckoutService, private accountService: AccountService) {
     }
 
     ngOnInit() {
         this.orderItems = this.checkoutService.orderItems;
         this.checkoutService.orderItemsChanged.subscribe((orderItems: OrderItem[]) => this.orderItems = orderItems);
         this.calculateTotal();
+        this.accountSubscription = this.accountService.get().subscribe(
+            (account) => this.address = account.homeAddress
+        );
+    }
+
+    ngOnDestroy() {
+        this.accountSubscription.unsubscribe();
     }
 
     removeItem(productId: number) {

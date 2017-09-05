@@ -21,7 +21,8 @@
                                    pattern="[0-9]+" required
                                    placeholder="Quantity.." [(ngModel)]="orderItem.quantity"
                                    (change)="calculateTotal()">
-                            <div [hidden]="!(form.controls['quantity' + i]?.dirty && form.controls['quantity' + i]?.invalid)">
+                            <div
+                                [hidden]="!(form.controls['quantity' + i]?.dirty && form.controls['quantity' + i]?.invalid)">
                                 <small class="form-text text-danger">
                                     This field is invalid.
                                 </small>
@@ -43,27 +44,33 @@
         </div>
         <div *ngIf="form.valid">
             <hr>
-            <div class="container-fluid">
-                <h5><span class="fa fa-address-card"></span> Shipping Address</h5>
-                <p>Address stuff</p>
-            </div>
-            <hr>
-            <div class="container-fluid">
-                <h5><span class="fa fa-credit-card"></span> Payment</h5>
-                <p>Stripe provides several credit card numbers that can be used for testing: </p>
-                <span class="fa fa-cc-visa"></span>
-                <pre>4242 4242 4242 4242</pre>
-                <span class="fa fa-cc-mastercard"></span>
-                <pre>5555 5555 5555 5555</pre>
-                <p>Stripe <a href="https://stripe.com/docs/testing" target="_blank">testing documentation.</a></p>
-                <div class="container-fluid text-center">
-                    <button class="btn btn-success" type="submit" [disabled]="form.invalid">
-                        <span class="fa fa-shopping-bag"></span> Purchase
-                    </button>
+            <div class="container-fluid" *ngIf="address">
+                <h5><span class="fa fa-truck"></span> Shipping Address</h5>
+                <div>
+                    <div class="text-muted">{{address.address}}</div>
+                    <div class="text-muted">{{address.city}}, {{address.state}} {{address.postalCode}}</div>
                 </div>
             </div>
+            <p></p>
+            <p></p>
         </div>
-    </form>
+        <hr>
+        <div class="container-fluid">
+            <h5><span class="fa fa-credit-card"></span> Payment</h5>
+            <p>Stripe provides several credit card numbers that can be used for testing, for example: </p>
+            <p>
+                <span class="fa fa-cc-visa"></span>
+                <span class="badge badge-info">4242 4242 4242 4242</span>
+            </p>
+            <p>Stripe <a href="https://stripe.com/docs/testing" target="_blank">testing documentation.</a></p>
+            <div class="container-fluid text-center">
+                <button class="btn btn-success" type="submit" [disabled]="form.invalid">
+                    <span class="fa fa-shopping-bag"></span> Purchase
+                </button>
+            </div>
+        </div>
+</div>
+</form>
 </div>
 <ng-template #noOrderItems>
     <p>There are no products in your basket.</p>
