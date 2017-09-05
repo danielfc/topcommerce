@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     };
     page = 0;
     totalItems: number;
+    typeToFilter = '';
 
     constructor(
         private principal: Principal,
@@ -102,5 +103,9 @@ export class HomeComponent implements OnInit {
 
     private onError(error) {
         this.alertService.error(error.message, null, null);
+    }
+
+    addFilter(type: string) {
+        this.typeToFilter = type;
     }
 }
