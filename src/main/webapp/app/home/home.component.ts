@@ -7,7 +7,6 @@ import {Product} from '../entities/product/product.model';
 import {ProductService} from '../entities/product/product.service';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
 import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
-import {LocalStorageService} from 'ng2-webstorage';
 
 @Component({
     selector: 'jhi-home',
@@ -34,8 +33,7 @@ export class HomeComponent implements OnInit {
         private eventManager: JhiEventManager,
         private productService: ProductService,
         private alertService: JhiAlertService,
-        private parseLinks: JhiParseLinks,
-        private localStorage: LocalStorageService
+        private parseLinks: JhiParseLinks
     ) {
     }
 
