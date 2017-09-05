@@ -1,18 +1,18 @@
 <div class="card" style="width: 12rem;">
-    <img class="card-img-top img-responsive"
+    <img class="card-img-top p-2"
          [src]="product.imagePath"
-         alt="Card image cap">
+         alt="image">
     <div class="card-block p-1">
         <dl>
             <dt class="card-title">
                 <a [routerLink]="['./product', product.id]" title="{{product.name}}">
-                    {{product.name | shorten:20}}
+                    {{product.name | shorten:25}}
                 </a>
             </dt>
         </dl>
         <dd>
-            <p class="card-text" title="{{product.description}}">{{product.description | shorten:50}}</p>
-            <p class="card-price text-center" style="font-size: 24px">
+            <p class="card-text" title="{{product.description}}">{{product.description | shorten:70}}</p>
+            <p class="card-price text-center">
                 {{product.price | currency:'USD':true}}
                 <button type="button" jhiPointer class="btn btn-primary btn-sm" (click)="addToCart(product)">
                     <span class="fa fa-cart-plus" title="Add to cart"></span></button>

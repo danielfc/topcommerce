@@ -5,7 +5,11 @@ import {CartService} from '../../cart/cart.service';
 @Component({
     selector: 'jhi-product-card',
     templateUrl: './product-card.component.html',
-    styles: []
+    styles: [
+        '.card-title {font-weight: 100;}',
+        '.card-text {font-size: 13px}',
+        '.card-price {font-size: 24px}'
+    ]
 })
 export class ProductCardComponent implements OnInit {
 

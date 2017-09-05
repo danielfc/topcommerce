@@ -1,9 +1,7 @@
 <div class="row">
     <div class="col-md-3">
         <ul class="list-group">
-            <li class="list-group-item">TV</li>
-            <li class="list-group-item">Books</li>
-            <li class="list-group-item">Food</li>
+            <li class="list-group-item" *ngFor="let type of productTypes">{{type.name}}</li>
         </ul>
     </div>
     <div class="col-md-9">

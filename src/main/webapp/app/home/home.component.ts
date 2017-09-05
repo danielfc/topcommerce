@@ -7,6 +7,8 @@ import {Product} from '../entities/product/product.model';
 import {ProductService} from '../entities/product/product.service';
 import {ResponseWrapper} from '../shared/model/response-wrapper.model';
 import {ITEMS_PER_PAGE} from '../shared/constants/pagination.constants';
+import {ProductTypeService} from '../entities/product-type/product-type.service';
+import {ProductType} from '../entities/product-type/product-type.model';
 
 @Component({
     selector: 'jhi-home',
@@ -20,6 +22,7 @@ export class HomeComponent implements OnInit {
     account: Account;
     modalRef: NgbModalRef;
     products: Product[] = [];
+    productTypes: ProductType[] = [];
     itemsPerPage = ITEMS_PER_PAGE;
     links = {
         last: 0
@@ -32,6 +35,7 @@ export class HomeComponent implements OnInit {
         private loginModalService: LoginModalService,
         private eventManager: JhiEventManager,
         private productService: ProductService,
+        private productTypeService: ProductTypeService,
         private alertService: JhiAlertService,
         private parseLinks: JhiParseLinks
     ) {
@@ -42,7 +46,8 @@ export class HomeComponent implements OnInit {
             this.account = account;
         });
         this.registerAuthenticationSuccess();
-        this.loadAll();
+        this.loadAllProductTypes();
+        this.loadAllProducts();
     }
 
     registerAuthenticationSuccess() {
@@ -55,7 +60,7 @@ export class HomeComponent implements OnInit {
 
     loadPage(page) {
         this.page = page;
-        this.loadAll();
+        this.loadAllProducts();
     }
 
     trackId(index: number, item: Product) {
@@ -70,22 +75,29 @@ export class HomeComponent implements OnInit {
         this.modalRef = this.loginModalService.open();
     }
 
-    loadAll() {
-        this.productService.query({
-            page: this.page,
-            size: this.itemsPerPage
-        }).subscribe(
-            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers),
+    loadAllProductTypes() {
+        this.productTypeService.query({
+            page: 0,
+            size: 999}).subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers, this.productTypes),
             (res: ResponseWrapper) => this.onError(res.json)
         );
     }
 
-    private onSuccess(data, headers) {
+    loadAllProducts() {
+        this.productService.query({
+            page: this.page,
+            size: this.itemsPerPage
+        }).subscribe(
+            (res: ResponseWrapper) => this.onSuccess(res.json, res.headers, this.products),
+            (res: ResponseWrapper) => this.onError(res.json)
+        );
+    }
+
+    private onSuccess(data, headers, array) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
-        for (let i = 0; i < data.length; i++) {
-            this.products.push(data[i]);
-        }
+        array.push(...data);
     }
 
     private onError(error) {
