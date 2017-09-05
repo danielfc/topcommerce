@@ -31,9 +31,10 @@ export class CheckoutService {
         this.cartService.removeProduct(productId);
     }
 
-    finish() {
+    finish(token: any) {
         this.order = new Order();
         this.order.orderItems = this.orderItems;
+        this.order.stripeToken = token.id;
         this.orderService.create(this.order).subscribe(
             (order: Order) => {
                 this.alertService.success(`Order ${order.code} created successfully!`);

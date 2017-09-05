@@ -44,6 +44,9 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST, fetch = EAGER)
     private Set<OrderItem> orderItems = new HashSet<>();
 
+    @Column(name = "stripe_token")
+    private String stripeToken;
+
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -130,6 +133,15 @@ public class Order implements Serializable {
         this.orderItems = orderItems;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
+
+
+    public String getStripeToken() {
+        return stripeToken;
+    }
+
+    public void setStripeToken(String stripeToken) {
+        this.stripeToken = stripeToken;
+    }
 
     @Override
     public boolean equals(Object o) {

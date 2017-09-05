@@ -15,6 +15,7 @@ export class Order implements BaseEntity {
         public code?: string,
         public user?: User,
         public orderItems?: BaseEntity[],
+        public stripeToken?: string
     ) {
     }
 }

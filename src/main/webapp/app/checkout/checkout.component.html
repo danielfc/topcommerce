@@ -5,7 +5,7 @@
         <div class="container-fluid mt-3">
             <h5><span class="fa fa-shopping-cart"></span> Order Items</h5>
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let orderItem of orderItems">
+                <li class="list-group-item" *ngFor="let orderItem of orderItems;let i = index">
                     <div class="row">
                         <div class="col-md-2">
                             <img [src]="orderItem.product.imagePath" class="max-height-s">
@@ -17,8 +17,15 @@
                             <p>{{orderItem.product.price | currency:'USD':true}}</p>
                         </div>
                         <div class="col-md-2 p-1">
-                            <input type="number" id="quantity" name="quantity" class="form-control" min="0"
-                                   placeholder="Quantity.." [(ngModel)]="orderItem.quantity">
+                            <input type="number" id="quantity{{i}}" name="quantity{{i}}" class="form-control" min="0"
+                                   pattern="[0-9]+" required
+                                   placeholder="Quantity.." [(ngModel)]="orderItem.quantity"
+                                   (change)="calculateTotal()">
+                            <div [hidden]="!(form.controls['quantity' + i]?.dirty && form.controls['quantity' + i]?.invalid)">
+                                <small class="form-text text-danger">
+                                    This field is invalid.
+                                </small>
+                            </div>
                         </div>
                         <div class="col-md-1">
                             <button class="btn btn-danger btn-sm mt-1" type="button"
@@ -29,21 +36,32 @@
                 </li>
             </ul>
         </div>
-        <hr>
-        <div class="container-fluid">
-            <h5><span class="fa fa-address-card"></span> Shipping Address</h5>
-            <p>Address stuff</p>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <h5 class="text-center"><span class="fa fa-money"></span> {{total | currency:'USD':true}}</h5>
+            </div>
         </div>
-        <hr>
-        <div class="container-fluid">
-            <h5><span class="fa fa-credit-card"></span> Payment</h5>
-            <p>Payment stuff</p>
-        </div>
-        <hr>
-        <div class="container-fluid text-center">
-            <button class="btn btn-success" type="submit" [disabled]="form.invalid">
-                <span class="fa fa-shopping-bag"></span> Finish
-            </button>
+        <div *ngIf="form.valid">
+            <hr>
+            <div class="container-fluid">
+                <h5><span class="fa fa-address-card"></span> Shipping Address</h5>
+                <p>Address stuff</p>
+            </div>
+            <hr>
+            <div class="container-fluid">
+                <h5><span class="fa fa-credit-card"></span> Payment</h5>
+                <p>Stripe provides several credit card numbers that can be used for testing: </p>
+                <span class="fa fa-cc-visa"></span>
+                <pre>4242 4242 4242 4242</pre>
+                <span class="fa fa-cc-mastercard"></span>
+                <pre>5555 5555 5555 5555</pre>
+                <p>Stripe <a href="https://stripe.com/docs/testing" target="_blank">testing documentation.</a></p>
+                <div class="container-fluid text-center">
+                    <button class="btn btn-success" type="submit" [disabled]="form.invalid">
+                        <span class="fa fa-shopping-bag"></span> Purchase
+                    </button>
+                </div>
+            </div>
         </div>
     </form>
 </div>
