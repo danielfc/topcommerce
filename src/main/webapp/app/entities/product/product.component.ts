@@ -78,6 +78,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     trackId(index: number, item: Product) {
         return item.id;
     }
+
     registerChangeInProducts() {
         this.eventSubscriber = this.eventManager.subscribe('productListModification', (response) => this.reset());
     }

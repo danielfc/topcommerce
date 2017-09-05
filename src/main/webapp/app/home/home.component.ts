@@ -22,7 +22,9 @@ export class HomeComponent implements OnInit {
     modalRef: NgbModalRef;
     products: Product[] = [];
     itemsPerPage = ITEMS_PER_PAGE;
-    links: any;
+    links = {
+        last: 0
+    };
     page = 0;
     totalItems: number;
 
@@ -51,6 +53,15 @@ export class HomeComponent implements OnInit {
                 this.account = account;
             });
         });
+    }
+
+    loadPage(page) {
+        this.page = page;
+        this.loadAll();
+    }
+
+    trackId(index: number, item: Product) {
+        return item.id;
     }
 
     isAuthenticated() {
