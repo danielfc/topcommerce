@@ -1,9 +1,7 @@
 package org.kalnee.topcommerce.service;
 
-import com.sun.deploy.association.utility.AppConstants;
 import org.kalnee.topcommerce.domain.Order;
 import org.kalnee.topcommerce.repository.OrderRepository;
-import org.kalnee.topcommerce.security.AuthoritiesConstants;
 import org.kalnee.topcommerce.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
