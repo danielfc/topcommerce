@@ -15,7 +15,7 @@
         <div class="form-group">
             <label class="form-control-label" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                [(ngModel)]="product.name" required max="255" />
+                [(ngModel)]="product.name" required maxlength="255" />
             <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.name?.errors?.required">
@@ -26,7 +26,7 @@
         <div class="form-group">
             <label class="form-control-label" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                [(ngModel)]="product.description" required max="255" />
+                [(ngModel)]="product.description" required maxlength="255" />
             <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.description?.errors?.required">
@@ -56,7 +56,7 @@
         <div class="form-group">
             <label class="form-control-label" for="field_imagePath">Image Path</label>
             <input type="text" class="form-control" name="imagePath" id="field_imagePath"
-                [(ngModel)]="product.imagePath" required />
+                [(ngModel)]="product.imagePath" required maxlength="255" />
             <div [hidden]="!(editForm.controls.imagePath?.dirty && editForm.controls.imagePath?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.imagePath?.errors?.required">
