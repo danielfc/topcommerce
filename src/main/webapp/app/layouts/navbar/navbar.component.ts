@@ -61,6 +61,7 @@ export class NavbarComponent implements OnInit {
 
     logout() {
         this.collapseNavbar();
+        this.cartService.clear();
         this.loginService.logout();
         this.router.navigate(['']);
     }
