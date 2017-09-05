@@ -44,18 +44,21 @@
         </div>
         <div *ngIf="form.valid">
             <hr>
-            <div class="container-fluid" *ngIf="address">
+            <div class="container-fluid">
                 <h5><span class="fa fa-truck"></span> Shipping Address</h5>
-                <div>
+                <div *ngIf="address; else noAddress">
                     <div class="text-muted">{{address.address}}</div>
                     <div class="text-muted">{{address.city}}, {{address.state}} {{address.postalCode}}</div>
                 </div>
+                <ng-template #noAddress>
+                    <p class="alert alert-warning">
+                        <span class="fa fa-warning"></span> Your shipping address is missing, please update your profile.
+                    </p>
+                </ng-template>
             </div>
-            <p></p>
-            <p></p>
         </div>
         <hr>
-        <div class="container-fluid">
+        <div class="container-fluid" *ngIf="form.valid && address">
             <h5><span class="fa fa-credit-card"></span> Payment</h5>
             <p>Stripe provides several credit card numbers that can be used for testing, for example: </p>
             <p>
@@ -74,4 +77,9 @@
 </div>
 <ng-template #noOrderItems>
     <p>There are no products in your basket.</p>
+    <p>
+        <button class="btn btn-primary" routerLink="/" type="button">
+            <span class="fa fa-shopping-cart"></span> Continue shopping
+        </button>
+    </p>
 </ng-template>

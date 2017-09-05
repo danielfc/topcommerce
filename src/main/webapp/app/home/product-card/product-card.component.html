@@ -3,15 +3,20 @@
          [src]="product.imagePath"
          alt="Card image cap">
     <div class="card-block p-1">
-        <h4 class="card-title">
-            <a [routerLink]="['./product', product.id]" title="{{product.name}}">
-            {{product.name | shorten:20}}
-            </a>
-        </h4>
-        <p class="card-text" title="{{product.description}}">{{product.description | shorten:50}}</p>
-        <p class="card-price text-center" style="font-size: 24px">
-            {{product.price | currency:'USD':true}} <button type="button" class="btn btn-primary btn-sm" (click)="addToCart(product)">
-            <span class="fa fa-cart-plus"title="Add to cart"></span></button>
-        </p>
+        <dl>
+            <dt class="card-title">
+                <a [routerLink]="['./product', product.id]" title="{{product.name}}">
+                    {{product.name | shorten:20}}
+                </a>
+            </dt>
+        </dl>
+        <dd>
+            <p class="card-text" title="{{product.description}}">{{product.description | shorten:50}}</p>
+            <p class="card-price text-center" style="font-size: 24px">
+                {{product.price | currency:'USD':true}}
+                <button type="button" class="btn btn-primary btn-sm" (click)="addToCart(product)">
+                    <span class="fa fa-cart-plus" title="Add to cart"></span></button>
+            </p>
+        </dd>
     </div>
 </div>
