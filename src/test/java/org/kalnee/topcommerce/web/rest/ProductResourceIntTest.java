@@ -52,9 +52,6 @@ public class ProductResourceIntTest {
     private static final BigDecimal DEFAULT_PRICE = new BigDecimal(0);
     private static final BigDecimal UPDATED_PRICE = new BigDecimal(1);
 
-    private static final ZonedDateTime DEFAULT_CREATED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_CREATED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
     private static final String DEFAULT_IMAGE_PATH = "AAAAAAAAAA";
     private static final String UPDATED_IMAGE_PATH = "BBBBBBBBBB";
 
@@ -98,7 +95,6 @@ public class ProductResourceIntTest {
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION)
             .price(DEFAULT_PRICE)
-            .createdAt(DEFAULT_CREATED_AT)
             .imagePath(DEFAULT_IMAGE_PATH);
         return product;
     }
@@ -126,7 +122,6 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testProduct.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testProduct.getPrice()).isEqualTo(DEFAULT_PRICE);
-        assertThat(testProduct.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
         assertThat(testProduct.getImagePath()).isEqualTo(DEFAULT_IMAGE_PATH);
     }
 
@@ -235,7 +230,6 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.intValue())))
-            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))))
             .andExpect(jsonPath("$.[*].imagePath").value(hasItem(DEFAULT_IMAGE_PATH.toString())));
     }
 
@@ -253,7 +247,6 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.intValue()))
-            .andExpect(jsonPath("$.createdAt").value(sameInstant(DEFAULT_CREATED_AT)))
             .andExpect(jsonPath("$.imagePath").value(DEFAULT_IMAGE_PATH.toString()));
     }
 
@@ -278,7 +271,6 @@ public class ProductResourceIntTest {
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION)
             .price(UPDATED_PRICE)
-            .createdAt(UPDATED_CREATED_AT)
             .imagePath(UPDATED_IMAGE_PATH);
 
         restProductMockMvc.perform(put("/api/products")
@@ -293,7 +285,6 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testProduct.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testProduct.getPrice()).isEqualTo(UPDATED_PRICE);
-        assertThat(testProduct.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testProduct.getImagePath()).isEqualTo(UPDATED_IMAGE_PATH);
     }
 
