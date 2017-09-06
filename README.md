@@ -1,6 +1,57 @@
 # topcommerce
-This application was generated using JHipster 4.7.0, you can find documentation and help at [https://jhipster.github.io/documentation-archive/v4.7.0](https://jhipster.github.io/documentation-archive/v4.7.0).
 
+This application was developed as part of the Toptal Angular Academy course. Topcommerce is a monolith application with a Java + Spring Boot
+ back end and Angular 4 + Bootstrap 4 front end. Authorization/Authentication is token-based using JWT and Spring Security.
+
+Topcommerce was generated using JHipster 4.7.0, you can find documentation and help at [https://jhipster.github.io/documentation-archive/v4.7.0](https://jhipster.github.io/documentation-archive/v4.7.0).
+
+## Requirements
+
+- User can register at any time to the store (registration/auth mocking is permitted) OK
+- Recaptcha on user registration OK
+- Three types of roles: admin, manager, user OK
+	- Admin
+		- Can CRUD (Create, Read, Update, Delete) users OK
+		- Can assign/remove roles to users OK
+		- Can CRUD products OK
+		- Can RD orders OK
+	- Manager
+		- Can CRU products OK
+		- Can R orders OK
+		- Can change status of an order OK
+	- User
+		- Can R products OK
+		- Can CR orders OK
+		- Update Profile	OK
+			- Shipping Address OK
+			- Billing Address OK
+- Order checkout OK
+	- Ability to add different products and different quantities to the cart OK
+	- Payment using PayPal or Stripe Sandboxes OK
+	
+## Technical requirements
+
+- You can use a service like Firebase to power the backend of your application, alternatively, you can create your own with your language of preference.
+    - I chose `JHipster` since it generates boilerplate code that I am used to since my main stack is `Java` and `Spring Boot`. Nothing that `JHipster` generates is customized, 
+    it's purely the `Spring` standard reviewed by hundreds of contributors on GitHub. The code generated in the Client side is also 
+    approved by `Angular` contributors from `Google` and the community. It's easy to follow along, use best practices and is totally extensible as shown by my commits along the way.
+- Use `Ngrx` to manage the state
+    - To be honest, I chose not to cover this technical requirement since I don't see any gain on having a central Store to manage data for such
+    simple project. I'm using `Rxjs` extensively in the project (e.g. `Subject` and `Observables`), but I didn't see a point in adding Ngrx at this point since it's been changing a lot (e.g. from `Angular` 2 to 4).
+     I am aware of the benefits of state management using Store and Reducers, but as this phrase states, "You’ll know when you need Flux (the pattern). If you aren't sure if you need it, you don't need it.". I think that
+     Angular provides ways of managing the state just fine with the `Dependency Injection` mechanism and `Services`. If we understand how the `RootInjector` works as well as 
+     the `ChildInjector` when using Lazy loaded modules plus returning immutable data (e.g. I return array.slice() in order to work with a copy of the array), we
+      can achieve a degree of safety provided by `Ngrx`. More info on this [website](http://blog.angular-university.io/angular-2-redux-ngrx-rxjs/).
+- You can use third party UI libraries.
+    - I took a look at the state of `angular-material` but it's not very stable yet so I decided to go with `Bootstrap 4`, even though it's in Beta.
+- Separate modules for User/Admin+Manager supporting Lazy Loading.
+    - I honestly don't agree with this requirement and I am open to discuss it further. I might have not understood it correctly, but the way I see it,
+    we add more complexity by having separate modules per user role since they share most of the code with a few exceptions. The way Lazy loading is explained,
+    we should use it when we have parts of the app that are infrequently accessed so we can boost the overall start up time which won't be the case if we have 
+    separate modules per role (e.g. all roles can do something in Products, Products should always be loaded). As an example, I added the `app/about/about.module.ts` 
+    module being Lazy loaded just to show that it's easy enough to get it working with Angular 4. In addition, I added a preloading strategy `PreloadAllModules` to load
+    the Lazy modules after the app has been started. This way, we can improve the user experience when they access a Lazy loaded module.
+    
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
@@ -30,25 +81,17 @@ Add the `help` flag on any command to see how you can use it. For example, `yarn
 
 The `yarn run` command will list all of the scripts available to run for this project.
 
-### Service workers
+### Versions
 
-Service workers are commented by default, to enable them please uncomment the following code.
-
-* The service worker registering script in index.html
-```
-<script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-        .register('./sw.js')
-        .then(function() { console.log('Service Worker Registered'); });
-    }
-</script>
-```
-* The copy file option in webpack-common.js
-```js
-{ from: './src/main/webapp/sw.js', to: 'sw.js' },
-```
-Note: Add the respective scripts/assets in `sw.js` that is needed to be cached.
+- @angular/cli: 1.2.6,
+- @angular/core: 4.3.2
+- Node: 7.7.2
+- NPM: 4.1.2
+- Yarn: 0.20.0
+- JHipster generator: 4.7.0
+- Java: 8
+- Spring Boot: 1.5.6
+- Mysql: 5.7.18 (docker image)
 
 ### Managing dependencies
 
