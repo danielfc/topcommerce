@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {PreloadAllModules, RouterModule} from '@angular/router';
 
 import {aboutLazyRoute, navbarRoute} from '../app.route';
 import {errorRoute} from './';
@@ -12,7 +12,7 @@ const LAYOUT_ROUTES = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(LAYOUT_ROUTES, { useHash: true })
+        RouterModule.forRoot(LAYOUT_ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
     ],
     exports: [
         RouterModule
