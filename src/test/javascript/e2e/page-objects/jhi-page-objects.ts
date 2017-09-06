@@ -177,6 +177,14 @@ export class SettingsPage {
     firstName = element(by.id('firstName'));
     lastName = element(by.id('lastName'));
     email = element(by.id('email'));
+    address = element(by.id('address'));
+    city = element(by.id('city'));
+    state = element(by.id('state'));
+    postalCode = element(by.id('postal_code'));
+    billingAddress = element(by.id('billing_address'));
+    billingCity = element(by.id('billing_city'));
+    billingState = element(by.id('billing_state'));
+    billingPostalCode = element(by.id('billing_postal_code'));
     saveButton = element(by.css('button[type=submit]'));
     title = element.all(by.css('h2')).first();
 
@@ -214,6 +222,70 @@ export class SettingsPage {
 
     clearEmail() {
         this.email.clear();
+    }
+
+    setAddress(address) {
+        this.address.sendKeys(address);
+    }
+
+    getAddress() {
+        return this.address.getAttribute('value');
+    }
+
+    setCity(city) {
+        this.city.sendKeys(city);
+    }
+
+    getCity() {
+        return this.city.getAttribute('value');
+    }
+
+    setState(state) {
+        this.state.sendKeys(state);
+    }
+
+    getState() {
+        return this.state.getAttribute('value');
+    }
+
+    setPostalCode(postalCode) {
+        this.postalCode.sendKeys(postalCode);
+    }
+
+    getPostalCode() {
+        return this.postalCode.getAttribute('value');
+    }
+
+    setBillingAddress(billingAddress) {
+        this.billingAddress.sendKeys(billingAddress);
+    }
+
+    getBillingAddress() {
+        return this.billingAddress.getAttribute('value');
+    }
+
+    setBillingCity(billingCity) {
+        this.billingCity.sendKeys(billingCity);
+    }
+
+    getBillingCity() {
+        return this.billingCity.getAttribute('value');
+    }
+
+    setBillingState(billingState) {
+        this.billingState.sendKeys(billingState);
+    }
+
+    getBillingState() {
+        return this.billingState.getAttribute('value');
+    }
+
+    setBillingPostalCode(billingPostalCode) {
+        this.billingPostalCode.sendKeys(billingPostalCode);
+    }
+
+    getBillingPostalCode() {
+        return this.billingPostalCode.getAttribute('value');
     }
 
     getTitle() {

@@ -16,8 +16,8 @@ describe('account', () => {
     });
 
     it('should fail to login with bad password', () => {
-        const expect1 = /Welcome, Java Hipster!/;
-        element.all(by.css('h1')).first().getText().then((value) => {
+        const expect1 = /Featured Products/;
+        element.all(by.css('h3')).first().getText().then((value) => {
             expect(value).toMatch(expect1);
         });
         signInPage = navBarPage.getSignInPage();
@@ -31,7 +31,7 @@ describe('account', () => {
 
     it('should login successfully with admin account', () => {
         const expect1 = /Login/;
-        element.all(by.css('.modal-content label')).first().getText().then((value) => {
+        element.all(by.css('.modal-body label')).first().getText().then((value) => {
             expect(value).toMatch(expect1);
         });
         signInPage.clearUserName();
@@ -55,6 +55,14 @@ describe('account', () => {
         settingsPage.getTitle().then((value) => {
             expect(value).toMatch(expect1);
         });
+        settingsPage.setAddress('1499 Seymour st');
+        settingsPage.setCity('Charlotte');
+        settingsPage.setState('NC');
+        settingsPage.setPostalCode('28277');
+        settingsPage.setBillingAddress('1499 Seymour st');
+        settingsPage.setBillingCity('Charlotte');
+        settingsPage.setBillingState('NC');
+        settingsPage.setBillingPostalCode('28277');
         settingsPage.save();
 
         const expect2 = /Settings saved!/;

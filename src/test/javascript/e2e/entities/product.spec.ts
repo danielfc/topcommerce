@@ -9,7 +9,7 @@ describe('Product e2e test', () => {
     let productComponentsPage: ProductComponentsPage;
     const fileToUpload = '../../../../main/webapp/content/images/logo-jhipster.png';
     const absolutePath = path.resolve(__dirname, fileToUpload);
-    
+
 
     beforeAll(() => {
         browser.get('/');
@@ -39,16 +39,16 @@ describe('Product e2e test', () => {
         expect(productDialogPage.getNameInput()).toMatch('name');
         productDialogPage.setDescriptionInput('description');
         expect(productDialogPage.getDescriptionInput()).toMatch('description');
-        productDialogPage.setPriceInput('5');
-        expect(productDialogPage.getPriceInput()).toMatch('5');
-        productDialogPage.setCreatedAtInput(12310020012301);
-        expect(productDialogPage.getCreatedAtInput()).toMatch('2001-12-31T02:30');
-        productDialogPage.setImagePathInput('imagePath');
-        expect(productDialogPage.getImagePathInput()).toMatch('imagePath');
+        productDialogPage.setPriceInput('399.99');
+        expect(productDialogPage.getPriceInput()).toMatch('399.99');
+        productDialogPage.setImagePathInput('https://images-na.ssl-images-amazon.com/images/I/71MR8frcirL._SL1500_.jpg');
+        expect(productDialogPage.getImagePathInput()).toMatch(
+            'https://images-na.ssl-images-amazon.com/images/I/71MR8frcirL._SL1500_.jpg'
+        );
         productDialogPage.typeSelectLastOption();
         productDialogPage.save();
         expect(productDialogPage.getSaveButton().isPresent()).toBeFalsy();
-    }); 
+    });
 
     afterAll(() => {
         navBarPage.autoSignOut();
@@ -75,7 +75,6 @@ export class ProductDialogPage {
     nameInput = element(by.css('input#field_name'));
     descriptionInput = element(by.css('input#field_description'));
     priceInput = element(by.css('input#field_price'));
-    createdAtInput = element(by.css('input#field_createdAt'));
     imagePathInput = element(by.css('input#field_imagePath'));
     typeSelect = element(by.css('select#field_type'));
 
@@ -105,14 +104,6 @@ export class ProductDialogPage {
 
     getPriceInput = function () {
         return this.priceInput.getAttribute('value');
-    }
-
-    setCreatedAtInput = function (createdAt) {
-        this.createdAtInput.sendKeys(createdAt);
-    }
-
-    getCreatedAtInput = function () {
-        return this.createdAtInput.getAttribute('value');
     }
 
     setImagePathInput = function (imagePath) {
