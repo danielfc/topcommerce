@@ -6,6 +6,7 @@ import {CartService} from '../../cart/cart.service';
     selector: 'jhi-product-card',
     templateUrl: './product-card.component.html',
     styles: [
+        '.card {width: 12rem;}',
         '.card-title {font-weight: 100;}',
         '.card-text {font-size: 13px}',
         '.card-price {font-size: 24px}'
