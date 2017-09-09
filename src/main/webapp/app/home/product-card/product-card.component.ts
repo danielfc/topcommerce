@@ -1,6 +1,7 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {Product} from '../../entities/product/product.model';
 import {CartService} from '../../cart/cart.service';
+import {JhiAlertService} from "ng-jhipster";
 
 @Component({
     selector: 'jhi-product-card',
@@ -19,7 +20,8 @@ export class ProductCardComponent implements OnInit {
     @Input()
     product: Product;
 
-    constructor(private cartService: CartService) {
+    constructor(private cartService: CartService,
+                private alertService: JhiAlertService) {
     }
 
     ngOnInit() {
@@ -27,6 +29,7 @@ export class ProductCardComponent implements OnInit {
 
     addToCart(product: Product) {
         this.cartService.addProduct(product);
+        this.alertService.info(`${product.name} was added to your cart.`);
     }
 
 }
