@@ -14,18 +14,16 @@ export const productRoute: Routes = [
         path: 'product',
         component: ProductComponent,
         data: {
-            authorities: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_MANAGER'],
+            authorities: [],
             pageTitle: 'Products'
-        },
-        canActivate: [UserRouteAccessService]
+        }
     }, {
         path: 'product/:id',
         component: ProductDetailComponent,
         data: {
-            authorities: ['ROLE_ADMIN', 'ROLE_USER', 'ROLE_MANAGER'],
+            authorities: [],
             pageTitle: 'Products'
-        },
-        canActivate: [UserRouteAccessService]
+        }
     }
 ];
 
