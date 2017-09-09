@@ -7,27 +7,27 @@ Topcommerce was generated using JHipster 4.7.0, you can find documentation and h
 
 ## Requirements
 
-- User can register at any time to the store (registration/auth mocking is permitted) OK
-- Recaptcha on user registration OK
-- Three types of roles: admin, manager, user OK
+- User can register at any time to the store (registration/auth mocking is permitted) :white_check_mark:
+- Recaptcha on user registration :white_check_mark:
+- Three types of roles: admin, manager, user :white_check_mark:
 	- Admin
-		- Can CRUD (Create, Read, Update, Delete) users OK
-		- Can assign/remove roles to users OK
-		- Can CRUD products OK
-		- Can RD orders OK
+		- Can CRUD (Create, Read, Update, Delete) users :white_check_mark:
+		- Can assign/remove roles to users :white_check_mark:
+		- Can CRUD products :white_check_mark:
+		- Can RD orders :white_check_mark:
 	- Manager
-		- Can CRU products OK
-		- Can R orders OK
-		- Can change status of an order OK
+		- Can CRU products :white_check_mark:
+		- Can R orders :white_check_mark:
+		- Can change status of an order :white_check_mark:
 	- User
-		- Can R products OK
-		- Can CR orders OK
-		- Update Profile	OK
-			- Shipping Address OK
-			- Billing Address OK
-- Order checkout OK
-	- Ability to add different products and different quantities to the cart OK
-	- Payment using PayPal or Stripe Sandboxes OK
+		- Can R products :white_check_mark:
+		- Can CR orders :white_check_mark:
+		- Update Profile	:white_check_mark:
+			- Shipping Address :white_check_mark:
+			- Billing Address :white_check_mark:
+- Order checkout :white_check_mark:
+	- Ability to add different products and different quantities to the cart :white_check_mark:
+	- Payment using PayPal or Stripe Sandboxes :white_check_mark:
 	
 ## Technical requirements
 
