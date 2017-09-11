@@ -1,7 +1,7 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import {Product} from '../../entities/product/product.model';
 import {CartService} from '../../cart/cart.service';
-import {JhiAlertService} from "ng-jhipster";
+import {JhiAlertService} from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-product-card',

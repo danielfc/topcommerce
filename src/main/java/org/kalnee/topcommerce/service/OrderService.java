@@ -1,6 +1,7 @@
 package org.kalnee.topcommerce.service;
 
 import org.kalnee.topcommerce.domain.Order;
+import org.kalnee.topcommerce.repository.OrderItemRepository;
 import org.kalnee.topcommerce.repository.OrderRepository;
 import org.kalnee.topcommerce.security.SecurityUtils;
 import org.slf4j.Logger;
@@ -24,10 +25,13 @@ public class OrderService {
     private final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
     private final UserService userService;
 
-    public OrderService(OrderRepository orderRepository, UserService userService) {
+    public OrderService(OrderRepository orderRepository, OrderItemRepository orderItemRepository,
+                        UserService userService) {
         this.orderRepository = orderRepository;
+        this.orderItemRepository = orderItemRepository;
         this.userService = userService;
     }
 
@@ -92,6 +96,8 @@ public class OrderService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Order : {}", id);
-        orderRepository.delete(id);
+        final Order order = orderRepository.findOne(id);
+        orderItemRepository.delete(order.getOrderItems());
+        orderRepository.delete(order);
     }
 }

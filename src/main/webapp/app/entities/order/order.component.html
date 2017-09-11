@@ -36,7 +36,7 @@
                             <span class="hidden-md-down">View</span>
                         </button>
                         <button type="submit"
-                                *jhiHasAnyAuthority="['ROLE_ADMIN','ROLE_MANAGER']"
+                                *jhiHasAnyAuthority="['ROLE_MANAGER']"
                                 [routerLink]="['/', { outlets: { popup: 'order/'+ order.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
