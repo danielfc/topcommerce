@@ -59,7 +59,7 @@ public class OrderResource {
         }
         Order result = orderService.save(order);
         return ResponseEntity.created(new URI("/api/orders/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getCode()))
             .body(result);
     }
 

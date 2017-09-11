@@ -38,7 +38,7 @@
                 <td><img [src]="product.imagePath" class="img-responsive max-height-s"></td>
                 <td>
                     <div *ngIf="product.type">
-                        <a [routerLink]="['../product-type', product.type?.id ]" >{{product.type?.name}}</a>
+                        {{product.type?.name}}
                     </div>
                 </td>
                 <td class="text-right">

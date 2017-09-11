@@ -37,7 +37,6 @@ export class CheckoutService {
         this.order.stripeToken = token.id;
         this.orderService.create(this.order).subscribe(
             (order: Order) => {
-                this.alertService.success(`Order ${order.code} created successfully!`);
                 this.cartService.clear();
                 this.router.navigate(['/order', order.id]);
             },
